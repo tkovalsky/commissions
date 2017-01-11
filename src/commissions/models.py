@@ -118,36 +118,36 @@ class Lease(models.Model):
         return float(self.size_of_transaction) * float(self.rent_price) * float((self.lease_term_in_months/12)) * \
                 float(self.house_commission_rate) * float(self.rent_rate_factor)
 
+    @property
+    def display_option(self):
+        """
+        creates a string for the lease option.  this is required to see the lease option in the admin (since its a many to many join)
+        """
+        return ', '.join([ option.start_date for option in self.option.all()[:25] ])
+    #display_option.option_commencement_date = 'Option Start Date'
 
-#    def display_option(self):
-#        """
-#        creates a string for the lease option.  this is required to see the lease option in the admin (since its a many to many join)
-#        """
-#        return ', '.join([ option.rent_commencement_date for option in self.option.all()[:25] ])
-#    display_option.start_date = 'Option Start Dates'
 
-'''
 class Option(models.Model):
     """
     Model representing options on a lease
     """
-    lease = models.ForeignKey('Lease', null=True)
-    option_terms = models.TextField()
+    lease = models.ForeignKey('Lease', on_delete=models.CASCADE, null=True)
+    option_terms = models.TextField(blank=True)
     option_notice_date = models.DateField(null=True, blank=True)
     option_commencement_date = models.DateField(null=True, blank=True)
     option_expiration_date = models.DateField(null=True, blank=True)
     increase_or_decrease_size = models.IntegerField(null=True, blank=True)
     increase_or_decrease_rent_rate_factor = models.DecimalField(decimal_places=4, default=1, max_digits=5)
-    increase_or_decrease_commission_rate = models.DecimalField(decimal_places=4, default=1.000, max_digits=5)
-    option_contingencies = models.TextField = models.TextField(blank=True)
+    commission_rate = models.DecimalField(decimal_places=4, default=1.000, max_digits=5)
+    option_contingencies = models.TextField(blank=True)
     date_added = models.DateTimeField(auto_now=False, auto_now_add=True)
-    date_modified = models.DateTimeField("last modified", auto_now=True, auto_now_add=False)
+    date_modified = models.DateTimeField(auto_now=True, auto_now_add=False)
 
     def __str__(self):
-        return '%s (%s)' % (self.id, self.lease.tenant_name)
+        return '%s - %s' % (self.option_commencement_date, self.option_expiration_date)
 
 
-
+'''
 class Deal(models.Model):
     lease = models.ForeignKey('Lease', on_delete=models.SET_NULL, null=True)
     sale = models.ForeignKey('Sale', on_delete=models.SET_NULL, null=True)

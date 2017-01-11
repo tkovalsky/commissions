@@ -1,7 +1,7 @@
 from django.contrib import admin
 
-from .models import Sale, Lease
-#Option, Contact, Deal
+from .models import Sale, Lease, Option
+#, Contact, Deal
 
 
 @admin.register(Sale)
@@ -22,9 +22,16 @@ class SaleAdmin(admin.ModelAdmin):
                 'notes',
     ]
 
+    extra = 1
+
+class LeaseOptionInline(admin.TabularInline):
+    model = Option
 
 @admin.register(Lease)
 class LeaseAdmin(admin.ModelAdmin):
+    fields = ['location_name','size_of_transaction','rent_price', 'lease_term_in_months',]
+    inlines = [LeaseOptionInline]
+
     list_filter = ['date_added']
     list_display = ['location_name','property_owner_name', 'tenant_name', 'size_of_transaction', 'rent_price', 'get_aggregate_lease_commission']
     fields = ['location_name','size_of_transaction','rent_price', 'lease_term_in_months',
@@ -43,7 +50,14 @@ class LeaseAdmin(admin.ModelAdmin):
                                         'invoice_zip','contact_person', ),
                 'notes',
                 'contingencies'
-    ]
+                ]
+'''
+
+@admin.register(Option)
+class OptionAdmin(admin.ModelAdmin):
+        list_display = ['option_terms','option_notice_date', 'option_commencement_date', 'option_expiration_date', 'increase_or_decrease_size',
+                        'increase_or_decrease_rent_rate_factor', 'commission_rate', 'option_contingencies', ]
+
 
 
 
@@ -54,19 +68,14 @@ class LeaseAdmin(admin.ModelAdmin):
 #class OptionAdmin(admin.ModelAdmin):
 #    pass
 
-#class LeaseOptionInstanceInline(admin.TabularInline):
-#    model = Option
 
 #@admin.register(Lease)
 #class LeaseAdmin(admin.ModelAdmin):
-#    exclude = ('date_added', 'date_modified',)
+    #    exclude = ('date_added', 'date_modified',)
 #    inlines = [LeaseOptionInstanceInline]
 
 
 
-
-
-'''
 @admin.register(BookInstance)
 class BookInstanceAdmin(admin.ModelAdmin):
     list_filter = ('status', 'due_back')
