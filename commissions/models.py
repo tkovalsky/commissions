@@ -16,7 +16,7 @@ class Sale(models.Model):
     buyers_broker = models.CharField(max_length=80, blank=True)
     contingencies = models.TextField(max_length=1000, blank=True)
     closing_price = models.DecimalField(decimal_places=2, null=True, blank=True, max_digits=20)
-    house_commission_rate = models.DecimalField(decimal_places=4, default=1.000, max_digits=5)
+    deal_commission_rate = models.DecimalField(decimal_places=4, default=1.000, max_digits=5)
     house_rep_commission_split_rate = models.DecimalField(decimal_places=4, max_digits=5, default=1.000)
     outside_broker_commission_rate = models.DecimalField(decimal_places=4, default=0, max_digits=5)
     commission_due_date = models.DateField("commission paid on", blank=True, null=True)
@@ -49,11 +49,11 @@ class Sale(models.Model):
 
     @property
     def get_commissions_due_to_house(self):
-        return self.house_commission_rate * self.asking_price
+        return self.deal_commission_rate * self.asking_price
 
     @property
     def get_commissions_due_to_house_rep(self):
-        return (self.house_commission_rate * self.asking_price ) * self.house_rep_commission_split_rate
+        return (self.deal_commission_rate * self.asking_price ) * self.house_rep_commission_split_rate
 
 
     class Meta:
@@ -84,7 +84,7 @@ class Lease(models.Model):
     tenant_broker = models.CharField(max_length=80, blank=True)
     lease_expiration_date = models.DateField(null=True, blank=True)
     contingencies = models.TextField(max_length=1000, blank=True)
-    house_commission_rate = models.DecimalField(decimal_places=4, default=1.000, max_digits=5)
+    deal_commission_rate = models.DecimalField(decimal_places=4, default=1.000, max_digits=5)
     house_salesrep_commission_rate = models.DecimalField(decimal_places=4, null=True, blank=True, max_digits=5)
     outside_broker_commission_rate = models.DecimalField(decimal_places=4, null=True, blank=True, max_digits=5, default=0)
     commission_payout_terms = models.TextField(max_length=1000, blank=True)
@@ -115,7 +115,7 @@ class Lease(models.Model):
 
     @property
     def get_aggregate_lease_commission(self):
-        return float(self.size_of_transaction) * float(self.rent_price) * float((self.lease_term_in_months/12)) * float(self.house_commission_rate) * float(self.rent_rate_factor)
+        return float(self.size_of_transaction) * float(self.rent_price) * float((self.lease_term_in_months/12)) * float(self.deal_commission_rate) * float(self.rent_rate_factor)
 
     @property
     def display_option(self):

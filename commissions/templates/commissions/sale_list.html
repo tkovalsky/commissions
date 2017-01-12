@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Sale List</h1>
+
+    {% if sale_list %}
+    <ul>
+
+      {% for sale in sale_list %}
+      <li>
+        <a href="{{ sale.get_absolute_url }}">{{ sale.seller_name }}</a> ({{ sale.asking_price }})
+      </li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>There are no sales entered.</p>
+    {% endif %}
+{% endblock %}

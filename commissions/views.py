@@ -1,16 +1,49 @@
-from django.shortcuts import render
+import datetime
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404
+from django.urls import reverse_lazy
 from django.views import generic
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from .models import Sale
-#from .models import Lease, Option, Contact, Deal
+from .forms import AddSaleForm
 
-
+from .models import Sale, Lease, Option
+#from .models Contact, Deal
 
 class SalesListView(generic.ListView):
     model = Sale
 
 class SaleDetailView(generic.DetailView):
     model = Sale
+
+
+
+class SaleCreate(CreateView):
+    model = Sale
+    fields = '__all__'
+
+class SaleUpdate(UpdateView):
+    model = Sale
+    fields = '__all__'
+
+class SaleDelete(DeleteView):
+    model = Sale
+    success_url = reverse_lazy('sales')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 def index(request):
     """
@@ -34,18 +67,3 @@ def index(request):
             'num_sales':num_sales,
         },
     )
-
-
-
-
-'''
-class AuthorListView(generic.ListView):
-    model = Author
-    queryset = Author.objects.order_by('last_name')
-
-class AuthorDetailView(generic.DetailView):
-    model = Author
-    context_object_name = 'author'
-
-
-'''
