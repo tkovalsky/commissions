@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="179px" height="56px" viewBox="0 0 179 56" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(0.000000, -15.000000)">
+            <rect id="Rectangle" fill="#FFFFFF" x="25" y="15.157425" width="136" height="53.9983266"></rect>
+            <text id="999" opacity="0.900000036" font-family="HelveticaNeue-Thin, Helvetica Neue" font-size="72" font-weight="300" fill="#000000">
+                <tspan x="12" y="70">999</tspan>
+            </text>
+            <text id="$" font-family="Helvetica-Light, Helvetica" font-size="20" font-weight="300" fill="#000000">
+                <tspan x="0" y="34.157425">$</tspan>
+            </text>
+            <text id="/-WEEK" font-family="HelveticaNeue-Light, Helvetica Neue" font-size="14" font-weight="300" fill="#000000">
+                <tspan x="132" y="67.0509875">/ WEEK</tspan>
+            </text>
+        </g>
+    </g>
+</svg>
