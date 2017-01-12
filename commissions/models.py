@@ -70,7 +70,7 @@ class Lease(models.Model):
     location_name = models.CharField(max_length=120)
     signed_lease_date = models.DateField(null=True, blank=True)
     lease_term_in_months = models.IntegerField("lease term", null=True, blank=True)
-    size_of_transaction = models.IntegerField(null=True, blank=True)
+    size_of_transaction = models.IntegerField(null=True, blank=True, default=0)
     rent_price = models.DecimalField(decimal_places=2, max_digits=8)
     contract_execution_date = models.DateField(null=True, blank=True)
     free_rent_start_date = models.DateField(null=True, blank=True)
@@ -115,8 +115,7 @@ class Lease(models.Model):
 
     @property
     def get_aggregate_lease_commission(self):
-        return float(self.size_of_transaction) * float(self.rent_price) * float((self.lease_term_in_months/12)) * \
-                float(self.house_commission_rate) * float(self.rent_rate_factor)
+        return float(self.size_of_transaction) * float(self.rent_price) * float((self.lease_term_in_months/12)) * float(self.house_commission_rate) * float(self.rent_rate_factor)
 
     @property
     def display_option(self):
