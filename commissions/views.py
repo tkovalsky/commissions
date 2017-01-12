@@ -11,13 +11,12 @@ from .forms import AddSaleForm
 from .models import Sale, Lease, Option
 #from .models Contact, Deal
 
+#Views for sale transactions
 class SalesListView(generic.ListView):
     model = Sale
 
 class SaleDetailView(generic.DetailView):
     model = Sale
-
-
 
 class SaleCreate(CreateView):
     model = Sale
@@ -32,7 +31,24 @@ class SaleDelete(DeleteView):
     success_url = reverse_lazy('sales')
 
 
+#Views for lease transactions
+class LeaseListView(generic.ListView):
+    model = Lease
 
+class LeaseDetailView(generic.DetailView):
+    model = Lease
+
+class LeaseCreate(CreateView):
+    model = Lease
+    fields = '__all__'
+
+class LeaseUpdate(UpdateView):
+    model = Lease
+    fields = '__all__'
+
+class LeaseDelete(DeleteView):
+    model = Lease
+    success_url = reverse_lazy('leases')
 
 
 

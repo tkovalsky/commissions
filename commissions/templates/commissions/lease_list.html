@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Lease List</h1>
+
+    {% if lease_list %}
+    <ul>
+
+      {% for lease in lease_list %}
+      <li>
+        <a href="{{ lease.get_absolute_url }}">{{ lease.property_owner_name }}</a> ({{ lease.rent_price }})
+      </li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>There are no leases entered.</p>
+    {% endif %}
+{% endblock %}

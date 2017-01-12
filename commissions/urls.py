@@ -12,9 +12,14 @@ urlpatterns = [
 #    url(r'^sale/(?P<pk>[0-9]+)/$', views.DealDetailView.as_view(), name='deal-detail'),
     url(r'^sales/$', views.SalesListView.as_view(), name='sales'),
     url(r'^sale/(?P<pk>[0-9]+)/$', views.SaleDetailView.as_view(), name='sale-detail'),
-    url(r'^sale/create/$', views.SaleCreate.as_view(), name='sale_create'),
-    url(r'^sale/(?P<pk>\d+)/update/$', views.SaleUpdate.as_view(), name='sale_update'),
-    url(r'^sale/(?P<pk>\d+)/delete/$', views.SaleDelete.as_view(), name='sale_delete'),
+    url(r'^sale/create/$', views.SaleCreate.as_view(), name='sale-create'),
+    url(r'^sale/(?P<pk>\d+)/update/$', views.SaleUpdate.as_view(), name='sale-update'),
+    url(r'^sale/(?P<pk>\d+)/delete/$', views.SaleDelete.as_view(), name='sale-delete'),
+    url(r'^leases/$', views.LeaseListView.as_view(), name='leases'),
+    url(r'^lease/(?P<pk>[0-9]+)/$', views.LeaseDetailView.as_view(), name='lease-detail'),
+    url(r'^lease/create/$', views.LeaseCreate.as_view(), name='lease-create'),
+    url(r'^lease/(?P<pk>\d+)/update/$', views.LeaseUpdate.as_view(), name='lease-update'),
+    url(r'^lease/(?P<pk>\d+)/delete/$', views.LeaseDelete.as_view(), name='lease-delete'),
 
 
 
