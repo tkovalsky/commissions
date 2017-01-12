@@ -8,7 +8,10 @@
 
       {% for sale in sale_list %}
       <li>
-        <a href="{{ sale.get_absolute_url }}">{{ sale.seller_name }}</a> ({{ sale.asking_price }})
+        <a href="{{ sale.get_absolute_url }}">{{ sale.seller_name }}</a>
+        <li> Asking price: {{ sale.asking_price }} </li>
+        <li> Commission due to house:{{ sale.get_commissions_due_to_house }} </li>
+        <hr>
       </li>
       {% endfor %}
 

@@ -8,7 +8,11 @@
 
       {% for lease in lease_list %}
       <li>
-        <a href="{{ lease.get_absolute_url }}">{{ lease.property_owner_name }}</a> ({{ lease.rent_price }})
+        <a href="{{ lease.get_absolute_url }}">{{ lease.property_owner_name }}</a>
+        <li> Rent: {{ lease.rent_price }} </li>
+        <li> Aggregate commission: {{ lease.get_aggregate_lease_commission }} </li>
+
+        <hr>
       </li>
       {% endfor %}
 
