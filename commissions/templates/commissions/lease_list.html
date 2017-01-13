@@ -5,19 +5,26 @@
 
     {% if lease_list %}
     <ul>
-
+{% block middlecolumn %}
       {% for lease in lease_list %}
-      <li>
-        <a href="{{ lease.get_absolute_url }}">{{ lease.property_owner_name }}</a>
-        <li> Rent: {{ lease.rent_price }} </li>
-        <li> Aggregate commission: {{ lease.get_aggregate_lease_commission }} </li>
 
-        <hr>
-      </li>
+
+
+      <h6 class="list-group-header">
+        Devices and resolutions
+      </h6>
+
+        <a class="list-group-item list-group-item-action" href="{{ lease.get_absolute_url }}">
+          <span class="float-right text-muted">{{ lease.get_aggregate_lease_commission }}</span>
+          {{ lease.property_owner_name }}
+        </a>
+
+
       {% endfor %}
-
+{% endblock middlecolumn %}
     </ul>
     {% else %}
       <p>There are no leases entered.</p>
     {% endif %}
+
 {% endblock %}

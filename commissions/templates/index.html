@@ -1,10 +1,49 @@
 {% extends "base.html" %}
+{% block pagetitle %}Deal pipeline{% endblock pagetitle %}
+{% block pagesubtitle %}Dashboards{% endblock pagesubtitle %}
+
+{% block datepicker %}
+{% endblock datepicker %}
 
 {% block charts %}
+
+{% block doughnutchart1 %}
+{% endblock doughnutchart1 %}
+
+
+
 {% endblock charts %}
 
 {% block quickstats %}
 {% endblock quickstats %}
+
+
+{% block leftcolumntitle %}Commission pipeline{% endblock leftcolumntitle %}
+{% if sale_list %}
+      {% for sale in sale_list %}
+
+        <a class="list-group-item list-group-item-action" href="{{ sale.get_absolute_url }}">
+          <span class="list-group-progress" style="width: 62.4%;"></span>
+          <span class="float-right text-muted">62.4%</span>
+
+          {{ sale.location_name }}
+        </a>
+      {% endfor %}
+    {% else %}
+      <p>There are no sales entered.</p>
+    {% endif %}
+
+
+<!--example left column--> <!--
+        <a class="list-group-item list-group-item-action" href="#">
+          <span class="list-group-progress" style="width: 1.2%;"></span>
+          <span class="float-right text-muted">1.2%</span>
+          Japan
+        </a>
+-->
+
+
+
 
 {% block content %}
 <h1>Commission Tracker </h1>
