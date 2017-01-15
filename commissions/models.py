@@ -71,7 +71,7 @@ class Lease(models.Model):
     location_name = models.CharField(max_length=120)
     signed_lease_date = models.DateField(null=True, blank=True)
     lease_term_in_months = models.IntegerField("lease term", null=True, blank=True)
-    size_of_transaction = models.IntegerField(null=True, blank=True, default=0)
+    size_of_space = models.IntegerField(null=True, blank=True, default=0)
     rent_price = models.DecimalField(decimal_places=2, max_digits=8, default=0)
     lease_execution_date = models.DateField(null=True, blank=True)
     contingency_start_date = models.DateField(null=True, blank=True)
@@ -101,6 +101,8 @@ class Lease(models.Model):
     outside_broker_email_address = models.EmailField(blank=True)
     outside_broker_w9_on_file = models.BooleanField(default=False)
     notes = models.TextField(blank=True)
+    contingency_time_in_days = models.IntegerField(null=True, blank=True, default=0)
+    permit_type = models.CharField(max_length=100, blank=True)
     date_added = models.DateTimeField(auto_now=False, auto_now_add=True)
     date_modified = models.DateTimeField("last modified", auto_now=True, auto_now_add=False)
 
@@ -115,7 +117,7 @@ class Lease(models.Model):
 
     @property
     def get_aggregate_lease_commission(self):
-        return float(self.size_of_transaction) * float(self.rent_price) * float((self.lease_term_in_months/12)) * float(self.deal_commission_rate) * float(self.rent_rate_factor)
+        return float(self.size_of_space) * float(self.rent_price) * float((self.lease_term_in_months/12)) * float(self.deal_commission_rate) * float(self.rent_rate_factor)
 
     @property
     def display_option(self):
@@ -125,6 +127,47 @@ class Lease(models.Model):
         return ', '.join([ option.start_date for option in self.option.all()[:25] ])
     #display_option.option_commencement_date = 'Option Start Date'
 
+
+class Listing(models.Model):
+    property_owner_name = models.CharField(max_length=80)  #refactor to contacts model
+    location_name = models.CharField(max_length=120, null=True, blank=True)
+    location_address = models.CharField(max_length=120, null=True, blank=True)
+    term_of_agreement = models.IntegerField(null=True, blank=True, default=0)
+    invoice_contact_name = models.CharField(max_length=120, null=True, blank=True)
+    invoice_billing_address = models.CharField(max_length=120, null=True, blank=True)
+    invoice_billing_city = models.CharField(max_length=30, null=True, blank=True)
+    invoice_billing_state = models.CharField(max_length=30, null=True, blank=True)
+    invoice_billing_zip = models.CharField(max_length=10, null=True, blank=True)
+    listing_exectution_date = models.DateField(null=True, blank=True)
+    listing_expiration_date = models.DateField(null=True, blank=True)
+    LISTING_STATUS = (
+        ('new', 'New'),
+        ('approved', 'Approved'),
+        ('rejected', 'Rejected'),
+    )
+    status = models.CharField(max_length=25, choices=LISTING_STATUS, blank=True, default='new', help_text="Listing status")
+    LISTING_TYPE = (
+        ('not_classified', 'Not Classified'),
+        ('pad', 'Pad'),
+        ('space', 'Space'),
+    )
+    listing_type = models.CharField(max_length=25, choices=LISTING_TYPE, blank=True, default='not_classified', help_text="Property type")
+    notes = models.TextField(blank=True)
+
+class LeaseTerms(models.Model):
+    """
+    Model representing options on a lease
+    """
+    lease = models.ForeignKey('Lease', on_delete=models.CASCADE, null=True)
+    option_terms = models.TextField(blank=True)
+    term_start_date = models.DateField(null=True, blank=True)
+    term_end_date = models.DateField(null=True, blank=True)
+    commission_rate = models.DecimalField(decimal_places=4, default=0, max_digits=5)
+    date_added = models.DateTimeField(auto_now=False, auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True, auto_now_add=False)
+
+    def __str__(self):
+        return '%s - %s' % (self.term_start_date, self.term_end_date)
 
 class Option(models.Model):
     """
@@ -147,11 +190,28 @@ class Option(models.Model):
 
 
 '''
+Updated this a little but is not implemented.
+
 class Deal(models.Model):
     lease = models.ForeignKey('Lease', on_delete=models.SET_NULL, null=True)
     sale = models.ForeignKey('Sale', on_delete=models.SET_NULL, null=True)
-    contact = models.ForeignKey('Contact', on_delete=models.SET_NULL, null=True)
+    listing = models.ForeignKey('Listing', on_delete=models.SET_NULL, null=True)
+    broker_name = models.CharField(max_length=80, blank=True)
+    tenant_name = models.CharField(max_length=80, blank=True)
+    tenant_dba_name = models.CharField(max_length=80, blank=True)
     close_date = models.DateField(blank=True, null=True)
+    DEAL_STATUS = (
+        ('new', 'New'),
+        ('prospect', 'Prospect'),
+        ('loi_signed', 'LOI Signed'),
+        ('contract_signed', 'Available'),
+        ('closed', 'Closed'),
+        ('invoiced', 'Invoiced'),
+        ('in_collections', 'In Collections'),
+    )
+    size_of_space = models.IntegerField("lease term", null=True, blank=True)
+    status = models.CharField(max_length=25, choices=DEAL_STATUS, blank=True, default='new', help_text="Deal closing status")
+    annualized_rent = models.DecimalField(decimal_places=2, null=False, blank=False, max_digits=20, default=0)
     date_added = models.DateTimeField(auto_now=False, auto_now_add=True)
     date_modified = models.DateTimeField("last modified", auto_now=True, auto_now_add=False)
 
@@ -166,6 +226,20 @@ class Deal(models.Model):
         String for representing the Model object
         """
         return '%s, %s' % (self.id, self.close_date)
+
+    class Meta:
+        ordering = ["-close_date"]
+
+
+#future implementation to make activity of a location
+#class Activity(models.Model):
+#    status = models.CharField(max_length=25, choices=LISTING_STATUS, blank=True, default='new', help_text="Listing status")
+
+
+
+
+
+
 
 class Contact(models.Model):
     name = models.CharField(max_length=80, null=False, blank=False)

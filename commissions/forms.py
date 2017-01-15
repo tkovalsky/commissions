@@ -20,7 +20,7 @@ class AddLeaseForm(forms.ModelForm):
     class Meta:
         model = Lease
         fields = ['location_name', 'property_owner_name', 'rent_price', 'deal_commission_rate',
-        'lease_term_in_months', 'size_of_transaction',]
+        'lease_term_in_months', 'size_of_space',]
         labels = { 'contract_execution_date': ('Contract signed on'),
                     'deal_commission_rate': ('Deal commission'),}
         help_texts = { 'contract_execution_date': ('Enter the date of the closing.'), }

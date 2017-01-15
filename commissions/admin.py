@@ -8,7 +8,7 @@ from .models import Sale, Lease, Option
 class SaleAdmin(admin.ModelAdmin):
     list_filter = ['date_added']
     list_display = ['location_name','buyer_name', 'seller_name','asking_price', 'get_commissions_due_to_house', 'get_commissions_due_to_house_rep']
-    fields = ['location_name','property_owner_name', 'seller_name', 'size_of_transaction'
+    fields = ['location_name','property_owner_name', 'seller_name', 'size_of_space'
                 'asking_price','closing_price',
                 ('transaction_close_date', 'contract_execution_date', 'commission_due_date'),
                 ('sellers_broker', 'buyers_broker'),
@@ -29,13 +29,13 @@ class LeaseOptionInline(admin.TabularInline):
 
 @admin.register(Lease)
 class LeaseAdmin(admin.ModelAdmin):
-    fields = ['location_name','size_of_transaction','rent_price', 'lease_term_in_months',]
+    fields = ['location_name','size_of_space','rent_price', 'lease_term_in_months',]
     inlines = [LeaseOptionInline]
 
     list_filter = ['date_added']
-    list_display = ['location_name','property_owner_name', 'tenant_name', 'size_of_transaction', 'rent_price', 'get_aggregate_lease_commission']
-    fields = ['location_name','size_of_transaction','rent_price', 'lease_term_in_months',
-                ('signed_lease_date', 
+    list_display = ['location_name','property_owner_name', 'tenant_name', 'size_of_space', 'rent_price', 'get_aggregate_lease_commission']
+    fields = ['location_name','size_of_space','rent_price', 'lease_term_in_months',
+                ('signed_lease_date',
                                      'rent_commencement_date', 'occupancy_date', 'lease_expiration_date'),
                 ('rent_rate_factor', 'deal_commission_rate',
                                     'commission_payout_terms',),
