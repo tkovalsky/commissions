@@ -40,10 +40,7 @@
 
   <div class="flextable table-actions">
     <div class="flextable-item flextable-primary">
-      <div class="btn-toolbar-item input-with-icon">
-        <input type="text" value="{{ }} - {{ }}" class="form-control" data-provide="datepicker">
-        <span class="icon icon-calendar"></span>
-      </div>
+
     </div>
     <div class="flextable-item">
       <div class="btn-group">
@@ -58,24 +55,24 @@
   </div>
 
 
-
+<h5> Lease Options </h5>
   <div class="table-responsive">
     <table class="table" data-sort="table">
       <thead>
         <tr>
-          <th><input type="checkbox" class="select-all" id="selectAll"></th>
-          <th>Order</th>
-          <th>Customer name</th>
-          <th>Description</th>
-          <th>Date</th>
-          <th>Total</th>
+          <!--<th><input type="checkbox" class="select-all" id="selectAll"></th>-->
+          <th>ID</th>
+          <th>Change size by</th>
+          <th>UPDATE ME</th>
+          <th>UPDATE ME</th>
+          <th>UPDATE ME</th>
         </tr>
       </thead>
       <tbody>
         {% for option in lease.option_set.all %}
 
         <tr>
-          <td><input type="checkbox" class="select-row"></td>
+          <!--<<td><input type="checkbox" class="select-row"></td>-->
           <td><a href="#">{{ option.id }}</a></td>
           <td>{{ option.increase_or_decrease_size }}</td>
           <td>ADD A FIELD HERE</td>
@@ -87,32 +84,5 @@
       </tbody>
     </table>
   </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 {% endblock %}

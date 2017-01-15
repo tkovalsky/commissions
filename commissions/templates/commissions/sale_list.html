@@ -1,23 +1,33 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Sale List</h1>
+<div class="container">
+
+    <h1>Sales List</h1>
 
     {% if sale_list %}
     <ul>
 
-      {% for sale in sale_list %}
-      <li>
-        <a href="{{ sale.get_absolute_url }}">{{ sale.seller_name }}</a>
-        <li> Asking price: {{ sale.asking_price }} </li>
-        <li> Commission due to house:{{ sale.get_commissions_due_to_house }} </li>
-        <hr>
-      </li>
+  {% for sale in sale_list %}
+
+
+      <h6 class="list-group-header">
+        Devices and resolutions
+      </h6>
+
+        <a class="list-group-item list-group-item-action" href="{{ sale.get_absolute_url }}">
+          <span class="float-right text-muted">{{ sale.get_commissions_due_to_house }}</span>
+          {{ sale.asking_price }}
+        </a>
+
+
       {% endfor %}
 
     </ul>
     {% else %}
       <p>There are no sales entered.</p>
     {% endif %}
+    {% include 'paginator.html' %}
+
+</div>
 {% endblock %}
-{% include 'paginator.html' %}
