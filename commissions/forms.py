@@ -27,9 +27,6 @@ class AddLeaseForm(forms.ModelForm):
 
 
 
-
-
-
 '''
 from django.forms import ModelForm
 from .models import BookInstance
