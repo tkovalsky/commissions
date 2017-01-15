@@ -67,7 +67,7 @@ def index(request):
     """
     #Generate counts for some main objects
 #    num_deals=Deal.objects.all().count()
-#    num_leases=Lease.objects.all().count()
+    num_leases=Lease.objects.all().count()
     num_sales=Sale.objects.all().count()
 #    num_options=Option.objects.all().count()
 #    num_contacts=Contacts.objects.all().count()
@@ -81,5 +81,6 @@ def index(request):
         'index.html',
         context={
             'num_sales':num_sales,
+            'num_leases':num_leases,
         },
     )

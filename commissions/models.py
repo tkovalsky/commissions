@@ -76,8 +76,6 @@ class Lease(models.Model):
     lease_execution_date = models.DateField(null=True, blank=True)
     contingency_start_date = models.DateField(null=True, blank=True)
     contingency_end_date = models.DateField(null=True, blank=True)
-    contingency_start_date = models.DateField(null=True, blank=True)
-    contingency_end_date = models.DateField(null=True, blank=True)
     rent_commencement_date = models.DateField(null=True, blank=True)
     rent_rate_factor = models.DecimalField(decimal_places=4, default=1, max_digits=5)
     occupancy_date = models.DateField(null=True, blank=True)

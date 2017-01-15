@@ -1,21 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Commission Tracker </h1>
-
-   <p> Welcome to <em>Commission Tracker</em></p>
-
-<h2>Dynamic content</h2>
-
-   <p> You have this many deals:</p>
-
-   <ul>
-      <li><strong>Sales: </strong> {{ num_sales }} </li>
-      <li><strong>Leases: </strong> {{ num_sales }} </li>
-   </ul>
-
-
-
+<div class="container">
    <div class="dashhead">
      <div class="dashhead-titles">
        <h6 class="dashhead-subtitle">Dashboards</h6>
@@ -59,13 +45,13 @@
                class="ex-graph"
                width="200" height="200"
                data-chart="doughnut"
-               data-dataset="[230, 130]"
+               data-dataset="[{{ num_leases}}, {{ num_sales}} ]"
                data-dataset-options="{ backgroundColor: ['#1ca8dd', '#1bc98e'] }"
-               data-labels="['Returning', 'New']">
+               data-labels="['Leases', 'Sales']">
              </canvas>
            </div>
-           <strong class="text-muted">Traffic</strong>
-           <h4>New vs Returning</h4>
+           <strong class="text-muted">Deal Types</strong>
+           <h4>Sales vs Leases</h4>
          </div>
          <div class="col-md-4 mb-4">
            <div class="w-3 mx-auto">
@@ -80,7 +66,7 @@
              </canvas>
            </div>
            <strong class="text-muted">Revenue</strong>
-           <h4>New vs Recurring</h4>
+           <h4>Lorem vs Ipsum</h4>
          </div>
          <div class="col-md-4 mb-5">
            <div class="w-3 mx-auto">
@@ -95,7 +81,7 @@
              </canvas>
            </div>
            <strong class="text-muted">Traffic</strong>
-           <h4>Direct vs Referrals</h4>
+           <h4>Ipsum vs Dolar Sit</h4>
          </div>
        </div>
      </div>
@@ -356,13 +342,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
+ </div>
+ </div>
 {% endblock %}
