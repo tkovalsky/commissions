@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Sale, Lease, Option
+from .models import Sale, Lease, Option, LeaseTerm, TenantRep, Listing
 #, Contact, Deal
 
 
@@ -8,8 +8,7 @@ from .models import Sale, Lease, Option
 class SaleAdmin(admin.ModelAdmin):
     list_filter = ['date_added']
     list_display = ['location_name','buyer_name', 'seller_name','asking_price', 'get_commissions_due_to_house', 'get_commissions_due_to_house_rep']
-    fields = ['location_name','property_owner_name', 'seller_name', 'size_of_space'
-                'asking_price','closing_price',
+    fields = ['location_name','seller_name','closing_price', 'added_by',
                 ('transaction_close_date', 'contract_execution_date', 'commission_due_date'),
                 ('sellers_broker', 'buyers_broker'),
                 ('deal_commission_rate', 'house_rep_commission_split_rate'),
@@ -27,10 +26,14 @@ class SaleAdmin(admin.ModelAdmin):
 class LeaseOptionInline(admin.TabularInline):
     model = Option
 
+class LeaseTermInline(admin.TabularInline):
+    model = LeaseTerm
+
+
 @admin.register(Lease)
 class LeaseAdmin(admin.ModelAdmin):
-    fields = ['location_name','size_of_space','rent_price', 'lease_term_in_months',]
-    inlines = [LeaseOptionInline]
+    fields = ['location_name','size_of_space','rent_price', 'lease_term_in_months', 'term_start_date', 'term_end_date']
+    inlines = [LeaseOptionInline, LeaseTermInline]
 
     list_filter = ['date_added']
     list_display = ['location_name','property_owner_name', 'tenant_name', 'size_of_space', 'rent_price', 'get_aggregate_lease_commission']
@@ -51,6 +54,18 @@ class LeaseAdmin(admin.ModelAdmin):
                 'notes',
                 'contingencies'
                 ]
+    extra = 1
+
+
+
+@admin.register(TenantRep)
+class TenantRepAdmin(admin.ModelAdmin):
+    exclude = ['date_modified','date_added']
+    extra = 1
+
+
+
+
 '''
 
 @admin.register(Option)

@@ -40,7 +40,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'crispy_forms',
+    #'import_export',
+    'accounts',
 ]
+
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -143,3 +148,13 @@ EMAIL_USE_TLS = False
 EMAIL_PORT = 1025
 
 #LOGIN_REDIRECT_URL = "home"
+
+#CRISPY_TEMPLATE_PACK = 'uni_form'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+#here is a link to aguide on django import export module - https://simpleisbetterthancomplex.com/packages/2016/08/11/django-import-export.html
+
+#IMPORT_EXPORT_USE_TRANSACTIONS = True
+
+#AUTH_USER_MODEL = 'customauth.MyUser'
+AUTH_USER_MODEL = 'accounts.MyUser'

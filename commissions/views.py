@@ -1,32 +1,57 @@
 import datetime
+from django import forms
+from django.contrib.auth.mixins import LoginRequiredMixin #TODO
 from django.core.urlresolvers import reverse
+from django.db.models import Q
+from django.forms import modelformset_factory
+from django.forms.utils import ErrorList
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from .forms import AddSaleForm
+from .forms import AddSaleForm, AddLeaseForm
 
-from .models import Sale, Lease, Option
+from .models import Sale, Lease, Option, Listing, LeaseTerm
+
 #from .models Contact, Deal
+
+
+def lease_formset_view(request):
+    LeaseModelFormset = modelformset_factory(Lease, fields=['location_name',
+                                                            'term_start_date'],
+                                                            extra=2)
+    formset = LeaseModelFormset(request.POST or None)
+    if formset.is_valid():
+        for form in formset:
+            print(form.cleaned_data)
+    context = {
+        "formset": formset
+    }
+    return render(request, "lease_formset_view.html", context)
 
 #Views for sale transactions
 class SalesListView(generic.ListView):
     model = Sale
 
+    def get_context_data(self, *args, **kwargs):
+        context = super(SalesListView, self).get_context_data(*args, **kwargs)
+
 class SaleDetailView(generic.DetailView):
     model = Sale
 
-class SaleCreate(CreateView):
+class SaleCreateView(CreateView):
+    #can use fields or form_class
+    #form_class = AddSaleForm
     model = Sale
     fields = '__all__'
 
-class SaleUpdate(UpdateView):
+class SaleUpdateView(UpdateView):
     model = Sale
     fields = '__all__'
 
-class SaleDelete(DeleteView):
+class SaleDeleteView(DeleteView):
     model = Sale
     success_url = reverse_lazy('sales')
 
@@ -38,19 +63,28 @@ class LeaseListView(generic.ListView):
 class LeaseDetailView(generic.DetailView):
     model = Lease
 
-class LeaseCreate(CreateView):
+class LeaseCreateView(CreateView):
     model = Lease
     fields = '__all__'
 
-class LeaseUpdate(UpdateView):
+
+class LeaseUpdateView(UpdateView):
     model = Lease
     fields = '__all__'
 
-class LeaseDelete(DeleteView):
+class LeaseDeleteView(DeleteView):
     model = Lease
     success_url = reverse_lazy('leases')
 
 
+class SearchView(generic.ListView):
+
+    def get_querset(self, *args, **kwargs):
+        queryset = Sale.objects.all() + Lease.objects.all()
+        query = self.request.GET.get("q", None)
+        if query is not None:
+            queryset = queryset.filter(content__icontains=query)
+        return queryset
 
 
 

@@ -17,15 +17,26 @@ class AddSaleForm(forms.ModelForm):
 
 
 class AddLeaseForm(forms.ModelForm):
+    content = forms.CharField(label='',
+                widget=forms.Textarea(
+                        attrs={'placeholder': "Your message",
+                            "class": "form-control"}
+                    ))
     class Meta:
         model = Lease
-        fields = ['location_name', 'property_owner_name', 'rent_price', 'deal_commission_rate',
-        'lease_term_in_months', 'size_of_space',]
+        fields = ['location_name', 'property_owner_name', 'rent_price', 'deal_commission_rate', 'size_of_space', ]
         labels = { 'contract_execution_date': ('Contract signed on'),
                     'deal_commission_rate': ('Deal commission'),}
         help_texts = { 'contract_execution_date': ('Enter the date of the closing.'), }
 
+    def clean_location_name(self, *args, **kwargs):
+        location_name = self.cleaned_data.get("location_name")
+        if content == "abc":
+            raise forms.ValidationError("Cannot be ABC")
+        return content
 
+class SearchForm(forms.Form):
+    search_text = forms.CharField()
 
 '''
 from django.forms import ModelForm
