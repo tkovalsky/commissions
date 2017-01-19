@@ -21,6 +21,6 @@ urlpatterns = [
     url(r'^lease/(?P<pk>\d+)/update/$', views.LeaseUpdateView.as_view(), name='lease-update'),
     url(r'^lease/(?P<pk>\d+)/delete/$', views.LeaseDeleteView.as_view(), name='lease-delete'),
 
-
+    url(r'^tenantrep/$', views.create_tenant_rep, name='create-tenantrep'),
 
 ]

@@ -11,9 +11,9 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from .forms import AddSaleForm, AddLeaseForm
+from .forms import AddSaleForm, AddLeaseForm, CreateTenantRepForm
 
-from .models import Sale, Lease, Option, Listing, LeaseTerm
+from .models import Sale, Lease, LeaseOption, Location, LeaseTerm
 
 #from .models Contact, Deal
 
@@ -66,6 +66,16 @@ class LeaseDetailView(generic.DetailView):
 class LeaseCreateView(CreateView):
     model = Lease
     fields = '__all__'
+
+
+'''
+function based view used to create custom form for tenant reps
+'''
+def create_tenant_rep(request):
+    form_class = CreateTenantRepForm
+
+    return render(request, 'commissions/create_tenant_rep.html', { 'form': form_class,
+    })
 
 
 class LeaseUpdateView(UpdateView):
