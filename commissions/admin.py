@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Sale, Lease, LeaseOption, LeaseTerm, TenantRep, Location, BusinessType
+from .models import Sale, Lease, LeaseOption, LeaseTerm, Tenant, Location, BusinessType, Mandate
 #, Contact, Deal
 
 
@@ -35,7 +35,7 @@ class LeaseAdmin(admin.ModelAdmin):
 
     list_filter = ['created']
     list_display = ['location_name','property_owner_name', 'tenant_name', 'size_of_space', 'rent_price', 'get_aggregate_lease_commission']
-    fields = ['location_name','size_of_space','rent_price', 'lease_term_in_months','term_start_date', 'term_end_date',
+    fields = ['location_name','size_of_space','rent_price', 'lease_term_in_months',
                 ('signed_lease_date','rent_commencement_date', 'occupancy_date', 'lease_expiration_date'),
                 ('rent_rate_factor', 'deal_commission_rate','commission_payout_terms',),
                 ('tenant_broker'),
@@ -54,25 +54,29 @@ class LeaseAdmin(admin.ModelAdmin):
 class LocationInline(admin.TabularInline):
     model = Location
 
-@admin.register(TenantRep)
-class TenantRepAdmin(admin.ModelAdmin):
-    exclude = ['date_modified','created']
-    extra = 1
+class MandateInline(admin.TabularInline):
+    model = Mandate
 
+class TenantInline(admin.TabularInline):
+    model = Tenant
+
+
+@admin.register(Tenant)
+class TenantAdmin(admin.ModelAdmin):
+    fields = ['name_of_company', 'contact', 'notes']
+    #inlines = ['LocationInline']
 
 @admin.register(Location)
 class LocationAdmin(admin.ModelAdmin):
-    exclude = ['date_modified','created']
-    extra = 1
-
+    fields = ['name_of_property', 'property_owner', 'address', 'term_of_agreement', 'city', 'state', 'zip_code', 'tags']
+    #inlines = ['TenantInline']
 
 
 
 
 @admin.register(BusinessType)
 class BusinessTypeAdmin(admin.ModelAdmin):
-    exclude = ['date_modified', 'created']
-    extra = 1
+    fields = ['name',]
 
 
 '''

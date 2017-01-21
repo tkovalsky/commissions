@@ -11,13 +11,11 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from .forms import AddSaleForm, AddLeaseForm, CreateTenantRepForm
+from .forms import AddSaleForm, AddLeaseForm, AddLocationForm
 
-from .models import Sale, Lease, LeaseOption, Location, LeaseTerm
+from .models import Sale, Lease, LeaseTerm, LeaseOption, Location, Tenant
 
-#from .models Contact, Deal
-
-
+'''
 def lease_formset_view(request):
     LeaseModelFormset = modelformset_factory(Lease, fields=['location_name',
                                                             'term_start_date'],
@@ -30,8 +28,9 @@ def lease_formset_view(request):
         "formset": formset
     }
     return render(request, "lease_formset_view.html", context)
+'''
 
-#Views for sale transactions
+#Views for sales
 class SalesListView(generic.ListView):
     model = Sale
 
@@ -54,9 +53,10 @@ class SaleUpdateView(UpdateView):
 class SaleDeleteView(DeleteView):
     model = Sale
     success_url = reverse_lazy('sales')
+#End views for sales
 
 
-#Views for lease transactions
+#Views for leases
 class LeaseListView(generic.ListView):
     model = Lease
 
@@ -67,17 +67,6 @@ class LeaseCreateView(CreateView):
     model = Lease
     fields = '__all__'
 
-
-'''
-function based view used to create custom form for tenant reps
-'''
-def create_tenant_rep(request):
-    form_class = CreateTenantRepForm
-
-    return render(request, 'commissions/create_tenant_rep.html', { 'form': form_class,
-    })
-
-
 class LeaseUpdateView(UpdateView):
     model = Lease
     fields = '__all__'
@@ -85,22 +74,19 @@ class LeaseUpdateView(UpdateView):
 class LeaseDeleteView(DeleteView):
     model = Lease
     success_url = reverse_lazy('leases')
+#End views for leases
 
 
-class SearchView(generic.ListView):
+#Views for Locations and tenants
+class LocationListView(generic.ListView):
+    model = Location
 
-    def get_querset(self, *args, **kwargs):
-        queryset = Sale.objects.all() + Lease.objects.all()
-        query = self.request.GET.get("q", None)
-        if query is not None:
-            queryset = queryset.filter(content__icontains=query)
-        return queryset
+class LocationDetailView(generic.DetailView):
+    model = Location
 
-
-
-
-
-
+class AddLocationView(CreateView):
+    model = Location
+    fields = '__all__'
 
 
 

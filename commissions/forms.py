@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import inlineformset_factory, ModelForm
-from .models import Lease, Sale, LeaseOption
+from .models import Lease, Sale, LeaseOption, Location, Tenant
 
 
 class AddSaleForm(forms.ModelForm):
@@ -40,12 +40,22 @@ class SearchForm(forms.Form):
     search_text = forms.CharField()
 
 
-class CreateTenantRepForm(forms.Form):
-    name_of_business = forms.CharField()
-    business_type_tags = forms.CharField()
-    contact = forms.CharField()
-    notes = forms.CharField(widget=forms.Textarea)
-    
+class AddLocationForm(forms.ModelForm):
+    name_of_company = forms.CharField(max_length=30, required=False)
+
+    class Meta:
+        model = Location
+        fields = ('name_of_property', 'address')
+
+    def save(self, commit=True):
+        location = super(LocationForm, self).save(commit=False)
+        tenant = Tenant(name=self.cleaned_data['name_of_company'])
+
+        location.save()
+        location.tenant = tenant
+        if commit:
+            tenant.save()
+        return location
 
 
 '''

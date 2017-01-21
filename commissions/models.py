@@ -4,12 +4,15 @@ from django.conf import settings
 from django.db import models
 from django_extensions.db.models import TimeStampedModel
 from django.urls import reverse
+from taggit.managers import TaggableManager
+
 
 from . import managers
 
 #you can define a list of validations in a file (e.g. validators.py) and import it here, then add as an argument to the model
 #from .validators import validate_content
 
+MyUser = settings.AUTH_USER_MODEL
 
 class Sale(TimeStampedModel):
     """
@@ -45,7 +48,7 @@ class Sale(TimeStampedModel):
     outside_broker_email_address = models.EmailField(blank=True)
     outside_broker_w9_on_file = models.BooleanField(default=False)
     notes = models.TextField(blank=True)
-    added_by = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
+    added_by = models.ForeignKey(MyUser) #this is not working as expected.  Username not pulling thru in admin
 
     def __str__(self):
         return self.location_name
@@ -111,9 +114,7 @@ class Lease(TimeStampedModel):
     notes = models.TextField(blank=True)
     contingency_time_in_days = models.IntegerField(null=True, blank=True, default=0)
     permit_type = models.CharField(max_length=100, blank=True)
-    added_by = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
-
-    objects = managers.LeaseManager()
+    added_by = models.ForeignKey(MyUser, blank=True, null=True)
 
     def __str__(self):
         return self.location_name
@@ -152,6 +153,8 @@ class LeaseTerm(TimeStampedModel):
     term_end_date = models.DateField(null=True, blank=True)
     commission_rate = models.DecimalField(decimal_places=4, default=0, max_digits=5)
 
+
+
     class Meta:
         ordering = ['created']
 
@@ -176,74 +179,81 @@ class LeaseOption(models.Model):
     date_modified = models.DateTimeField(auto_now=True, auto_now_add=False)
 
     def __str__(self):
-        return '%s - %s' % (self.option_commencement_date, self.option_expiration_date)
+        return '%s - %s - %s' % (self.lease, self.option_commencement_date, self.option_expiration_date)
 
 
 class Location(TimeStampedModel):
-    property_owner_name = models.CharField(max_length=80)  #refactor to contacts model
-    name = models.CharField(max_length=120, null=True, blank=True)
+    tenants = models.ManyToManyField('Tenant', blank=True)
+    name_of_property = models.CharField("location name", max_length=120)
+    property_owner = models.CharField(max_length=80, null=True, blank=True)  #refactor to contacts model
     address = models.CharField(max_length=120, null=True, blank=True)
-    term_of_agreement = models.IntegerField(null=True, blank=True, default=0)
-    invoice_contact_name = models.CharField(max_length=120, null=True, blank=True)
-    invoice_billing_address = models.CharField(max_length=120, null=True, blank=True)
-    invoice_billing_city = models.CharField(max_length=30, null=True, blank=True)
-    invoice_billing_state = models.CharField(max_length=30, null=True, blank=True)
-    invoice_billing_zip = models.CharField(max_length=10, null=True, blank=True)
-    listing_execution_date = models.DateField(null=True, blank=True)
-    listing_expiration_date = models.DateField(null=True, blank=True)
+    term_of_agreement = models.PositiveIntegerField(null=True, blank=True, default=0)
+    city = models.CharField(max_length=30, null=True, blank=True)
+    state = models.CharField(max_length=30, null=True, blank=True)
+    zip_code = models.CharField(max_length=10, null=True, blank=True)
+
+    tags = TaggableManager()
 
     LOCATION_AVAILABILITY = (
         ('a', 'Available'),
+        ('n', 'Not Available'),
         ('l', 'For Lease'),
         ('s', 'For Sale'),
         ('b', 'Sublet'),
     )
 
-    availability = models.CharField(max_length=1, choices=LOCATION_AVAILABILITY, blank=True, default='a', help_text="Location status")
+    availability = models.CharField(max_length=1, choices=LOCATION_AVAILABILITY, blank=True, default='n', help_text="Location status")
 
-    LISTING_STATUS = (
-        ('n', 'New'),
-        ('a', 'Approved'),
-        ('r', 'Rejected'),
-    )
-
-    listing_status = models.CharField(max_length=2, choices=LISTING_STATUS, blank=True, default='n', help_text="Location status")
-
-    LOCATION_TYPE = (
+    PROPERTY_TYPE = (
         ('nc', 'Not Classified'),
         ('p', 'Pad'),
         ('b', 'Bank'),
         ('l', 'Land'),
     )
 
-    location_type = models.CharField(max_length=2, choices=LOCATION_TYPE, blank=True, default='nc', help_text="Property type")
+    property_type = models.CharField(max_length=2, choices=PROPERTY_TYPE, blank=True, default='nc')
     notes = models.TextField(blank=True)
+
+
+    def __str__(self):
+        return self.name_of_property
+
+    def get_absolute_url(self):
+         """
+         Returns the url to access a particular location.
+         """
+         return reverse('location-detail', args=[str(self.id)])
 
     class Meta:
         ordering = ['-created']
-        verbose_name = 'space'
-        verbose_name_plural = 'spaces'
 
-    def __str__(self):
-        return self.name_of_business
+#    @property
+#    def display_tenants(self):
+#        """
+#        creates a string for the tenants.  this is required to see the types in the admin (since its a many to many join)
+#        """
+#        return "\n".join([t.tenants for t in self.tenant.all()])
 
 
-class TenantRep(TimeStampedModel):
+
+
+class Tenant(TimeStampedModel):
     """
-    Model representing a tenant rep deal
+    Model representing tenants of a location
     """
-    locations = models.ForeignKey('Location', blank=True, null=True)
-    name_of_business = models.CharField(max_length=80, blank=True)
-    business_type_tags = models.ManyToManyField('BusinessType', help_text="Select the types of businesses that represent the tenant")
+    name_of_company = models.CharField(max_length=80, blank=True)
     contact = models.CharField(max_length=80, blank=True)
     notes = models.TextField(blank=True)
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
     date_modified = models.DateTimeField("last modified", auto_now=True, auto_now_add=False)
-    added_by = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
+    added_by = models.ForeignKey(MyUser, blank=True, null=True)
+
+    tags = TaggableManager()
 
 
     def __str__(self):
-        return self.name_of_business
+        return '%s' % (self.name_of_company)
+        #return self.name_of_company
 
     def get_absolute_url(self):
          """
@@ -252,16 +262,34 @@ class TenantRep(TimeStampedModel):
          return reverse('tenant-detail', args=[str(self.id)])
 
     class Meta:
-        ordering = ('name_of_business',)
+        ordering = ('name_of_company',)
 
-    @property
-    def display_business_type_tags(self):
-        """
-        creates a string for the business types.  this is required to see the types in the admin (since its a many to many join)
-        """
-        return ', '.join([ businesstype.name for businesstype in self.businesstype.all()[:25] ])
+#    @property
+#    def display_business_type_tags(self):
+#        """
+#        creates a string for the business types.  this is required to see the types in the admin (since its a many to many join)
+#        """
+#        return ', '.join([ businesstype.name for businesstype in self.businesstype.all()[:25] ])
 
 
+class Mandate(TimeStampedModel):
+    min_size = models.PositiveIntegerField(blank=True, null=True)
+    max_size = models.PositiveIntegerField(blank=True, null=True)
+    price_per_square_foot = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    notes = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return '%s - %s - $%s, %s' % (self.min_size, self.max_size, self.price_per_square_foot, self.notes)
+        #return self.name_of_company
+
+    def get_absolute_url(self):
+         """
+         Returns the url to access a particular tenant.
+         """
+         return reverse('mandate-detail', args=[str(self.id)])
+
+    class Meta:
+        ordering = ['-created',]
 
 
 class BusinessType(TimeStampedModel):
