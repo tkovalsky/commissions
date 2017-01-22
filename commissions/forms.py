@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import inlineformset_factory, ModelForm
-from .models import Lease, Sale, LeaseOption, Location, Tenant
+from .models import Lease, Sale, Option, Location, Tenant, Term
 
 
 class AddSaleForm(forms.ModelForm):

@@ -4,13 +4,13 @@
 
    <!--<p><strong>Author:</strong> <a href="{# url 'author-detail' book.author.pk #}"> {{ book.author }} </a></p> -->
 
-   <!--<p><strong>Genres:</strong> <a href=""> {% for option in lease.option.all %}
+   <p><strong>Genres:</strong> <a href=""> {% for option in lease.option.all %}
                                             {{ lease.id }}
                                             {% if not forloop.last %}
                                             {% endif %}
                                             {% endfor %}
                                 </a>
-  </p>-->
+  </p>
 
 <!--      <p class="{# if copy.status == 'a' #}text-success{# elif copy.status == 'd' #}text-danger{# else #}text-warning{# endif #}">{# copy.get_status_display #}</p>
       {# if copy.status != 'a' #}<p><strong>Due back on:</strong> {# copy.due_back #}</p> {# endif #}-->
@@ -26,7 +26,7 @@
     <h2 class="dashhead-title">{{ lease.location_name }}</h2>
     <p><strong>Property owner:</strong>{{ lease.property_owner_name }} </p>
     <p><strong>Asking price:</strong> {{ lease.rent_price }} </p>
-    <p><strong>Size of space:</strong> {{ lease.size_of_transaction }} </p>
+    <p><strong>Size of space:</strong> {{ lease.size_of_space }} </p>
 
   </div>
 
@@ -56,6 +56,27 @@
 
 
 <h5> Lease Options </h5>
+<br/>
+<br/>
+
+<hr>
+
+
+
+    <ul>
+        {% for option in lease.option_set.all %}
+            <li>{{ option.commencement_date }}</li>
+            <p><strong>Option ID:</strong> {{ option.id }}</p>
+
+         {% endfor %}
+    </ul>
+
+
+
+
+<hr>
+<br/>
+<br/>
   <div class="table-responsive">
     <table class="table" data-sort="table">
       <thead>
@@ -69,17 +90,17 @@
         </tr>
       </thead>
       <tbody>
-        {% for option in lease.option_set.all %}
+
 
         <tr>
           <!--<<td><input type="checkbox" class="select-row"></td>-->
-          <td><a href="#">{{ option.id }}</a></td>
-          <td>{{ option.increase_or_decrease_size }}</td>
-          <td>ADD A FIELD HERE</td>
-          <td>ADD A FIELD HERE</td>
-          <td>ADD A FIELD HERE</td>
+          <td><a href="#">LINK HERE</a></td>
+          <td>FIELD 0</td>
+          <td>FIELD 1</td>
+          <td>FIELD 2</td>
+          <td>FIELD 3</td>
         </tr>
-        {% endfor %}
+        {# endfor #}
 
       </tbody>
     </table>

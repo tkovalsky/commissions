@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+   <!--<p><strong>Genres:</strong> <a href=""> {% for option in lease.option.all %}
+                                            {{ lease.id }}
+                                            {% if not forloop.last %}
+                                            {% endif %}
+                                            {% endfor %}
+                                </a>
+  </p>-->
+
+<!--messages-->
+<!--      <p class="{# if copy.status == 'a' #}text-success{# elif copy.status == 'd' #}text-danger{# else #}text-warning{# endif #}">{# copy.get_status_display #}</p>
+      {# if copy.status != 'a' #}<p><strong>Due back on:</strong> {# copy.due_back #}</p> {# endif #}-->
+
+  <div class="container">
+        <div class="dashhead">
+  <div class="dashhead-titles">
+    <h6 class="dashhead-subtitle">Location</h6>
+    <h2 class="dashhead-title">{{ location.name_of_property }}</h2>
+    <h4 class="dashhead-title">{{ location.address }}</h4>
+    <p><strong>City:</strong> {{ location.city }} </p>
+    <p><strong>State:</strong> {{ location.state }} </p>
+    <p><strong>Zip Code:</strong> {{ location.zip }} </p>
+    <p><strong>Owned by:</strong>{{ location.property_owner }} </p>
+
+  </div>
+
+  <div class="btn-toolbar dashhead-toolbar">
+    <div class="btn-toolbar-item input-with-icon">
+      <input type="text" class="form-control input-block" placeholder="Search orders">
+      <span class="icon icon-magnifying-glass"></span>
+    </div>
+  </div>
+  </div>
+
+  <div class="flextable table-actions">
+    <div class="flextable-item flextable-primary">
+
+    </div>
+    <div class="flextable-item">
+      <div class="btn-group">
+        <button type="button" class="btn btn-outline-primary">
+          <span class="icon icon-pencil"></span>
+        </button>
+        <button type="button" class="btn btn-outline-primary">
+          <span class="icon icon-erase"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+<h5> Tenants at {{ location.name_of_property }} </h5>
+
+
+
+
+{% for tenant in location.tenant_set.all  %}
+{{ tenant.name_of_company }} <br>
+
+{% endfor %}
+
+
+
+  <div class="table-responsive">
+    <table class="table" data-sort="table">
+      <thead>
+        <tr>
+          <!--<th><input type="checkbox" class="select-all" id="selectAll"></th>-->
+          <th>Tenant Name</th>
+          <th>Tenant Type</th>
+          <th>Tenant Name</th>
+          <th>Tenant Name</th>
+          <th>Tenant Name</th>
+
+
+
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr>
+          <!--<<td><input type="checkbox" class="select-row"></td>-->
+
+          <td><a href="#"></a></td>
+          <td>ADD A FIELD HERE</td>
+          <td>ADD A FIELD HERE</td>
+          <td>ADD A FIELD HERE</td>
+          <td>ADD A FIELD HERE</td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+{% endblock %}

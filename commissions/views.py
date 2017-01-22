@@ -13,7 +13,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from .forms import AddSaleForm, AddLeaseForm, AddLocationForm
 
-from .models import Sale, Lease, LeaseTerm, LeaseOption, Location, Tenant
+from .models import Sale, Lease, Term, Option, Location, Tenant
 
 '''
 def lease_formset_view(request):
@@ -63,6 +63,14 @@ class LeaseListView(generic.ListView):
 class LeaseDetailView(generic.DetailView):
     model = Lease
 
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(LeaseDetailView, self).get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['options_list'] = Option.objects.all()
+        return context
+
+
 class LeaseCreateView(CreateView):
     model = Lease
     fields = '__all__'
@@ -87,9 +95,6 @@ class LocationDetailView(generic.DetailView):
 class AddLocationView(CreateView):
     model = Location
     fields = '__all__'
-
-
-
 
 def index(request):
     """

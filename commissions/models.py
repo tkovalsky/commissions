@@ -14,6 +14,17 @@ from . import managers
 
 MyUser = settings.AUTH_USER_MODEL
 
+BUSINESS_TYPE = (
+    ('nc', 'Not Classified'),
+    ('pizza', 'Pizza'),
+    ('bank', 'Bank'),
+    ('gym', 'Gym'),
+    ('bagel', 'Bagels'),
+    ('cafe', 'Cafe'),
+    )
+
+
+
 class Sale(TimeStampedModel):
     """
     Model representing the sale of a property
@@ -143,7 +154,7 @@ class Lease(TimeStampedModel):
         verbose_name_plural = ("Leases")
         ordering = ("-created",)
 
-class LeaseTerm(TimeStampedModel):
+class Term(TimeStampedModel):
     """
     Model representing terms on a lease
     """
@@ -163,7 +174,7 @@ class LeaseTerm(TimeStampedModel):
 
 
 
-class LeaseOption(models.Model):
+class Option(models.Model):
     """
     Model representing options on a lease
     """
@@ -179,20 +190,20 @@ class LeaseOption(models.Model):
     date_modified = models.DateTimeField(auto_now=True, auto_now_add=False)
 
     def __str__(self):
-        return '%s - %s - %s' % (self.lease, self.option_commencement_date, self.option_expiration_date)
+        return '%s - %s - %s' % (self.lease, self.commencement_date, self.expiration_date)
+
+    class Meta:
+        ordering = ("-expiration_date",)
 
 
 class Location(TimeStampedModel):
-    tenants = models.ManyToManyField('Tenant', blank=True)
-    name_of_property = models.CharField("location name", max_length=120)
+    tenants = models.ManyToManyField('Tenant', blank=True,)
+    name_of_property = models.CharField("property name", max_length=120)
     property_owner = models.CharField(max_length=80, null=True, blank=True)  #refactor to contacts model
     address = models.CharField(max_length=120, null=True, blank=True)
-    term_of_agreement = models.PositiveIntegerField(null=True, blank=True, default=0)
     city = models.CharField(max_length=30, null=True, blank=True)
     state = models.CharField(max_length=30, null=True, blank=True)
     zip_code = models.CharField(max_length=10, null=True, blank=True)
-
-    tags = TaggableManager()
 
     LOCATION_AVAILABILITY = (
         ('a', 'Available'),
@@ -241,19 +252,15 @@ class Tenant(TimeStampedModel):
     """
     Model representing tenants of a location
     """
+    locations = models.ForeignKey('Location', blank=True, null=True)
     name_of_company = models.CharField(max_length=80, blank=True)
-    contact = models.CharField(max_length=80, blank=True)
     notes = models.TextField(blank=True)
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
     date_modified = models.DateTimeField("last modified", auto_now=True, auto_now_add=False)
     added_by = models.ForeignKey(MyUser, blank=True, null=True)
 
-    tags = TaggableManager()
-
-
     def __str__(self):
-        return '%s' % (self.name_of_company)
-        #return self.name_of_company
+        return self.name_of_company
 
     def get_absolute_url(self):
          """

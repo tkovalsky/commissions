@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Sale, Lease, LeaseOption, LeaseTerm, Tenant, Location, BusinessType, Mandate
+from .models import Sale, Lease, Option, Term, Tenant, Location, BusinessType, Mandate
 #, Contact, Deal
 
 
@@ -24,10 +24,10 @@ class SaleAdmin(admin.ModelAdmin):
     extra = 1
 
 class LeaseOptionInline(admin.TabularInline):
-    model = LeaseOption
+    model = Option
 
 class LeaseTermInline(admin.TabularInline):
-    model = LeaseTerm
+    model = Term
 
 
 @admin.register(Lease)
@@ -63,13 +63,16 @@ class TenantInline(admin.TabularInline):
 
 @admin.register(Tenant)
 class TenantAdmin(admin.ModelAdmin):
-    fields = ['name_of_company', 'contact', 'notes']
-    #inlines = ['LocationInline']
+    fields = ['name_of_company', 'notes']
+    #inlines = [LocationInline,]
+    #ERRORS: <class 'commissions.admin.LocationInline'>: (admin.E202) 'commissions.Location' has no ForeignKey to 'commissions.Tenant'.
+
 
 @admin.register(Location)
 class LocationAdmin(admin.ModelAdmin):
-    fields = ['name_of_property', 'property_owner', 'address', 'term_of_agreement', 'city', 'state', 'zip_code', 'tags']
-    #inlines = ['TenantInline']
+    fields = ['name_of_property', 'availability', 'property_type','property_owner', 'address', 'city', 'state', 'zip_code', 'notes']
+    inlines = [TenantInline,]
+
 
 
 
