@@ -9,6 +9,29 @@
   <h6 class="dashhead-subtitle">Lease Detail</h6>
   <h2 class="dashhead-title">{{ lease.location_name }}</h2>
 </div>
+
+{% block modal %}
+  <div id="docsModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Example modal</h4>
+      </div>
+      <div class="modal-body">
+        <p>You're looking at an example modal in the dashboard theme.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Cool, got it!</button>
+      </div>
+    </div>
+  </div>
+
+{% endblock modal %}
+
+
+
 <div class="flextable table-actions">
   <div class="flextable-item flextable-primary">
 
@@ -55,7 +78,7 @@
             <th>Id</th>
             <th>Start Date</th>
             <th>End Date</th>
-            <th>Commission</th>
+            <th>Commission (%)</th>
             <th>Terms</th>
           </tr>
         </thead>
@@ -66,10 +89,10 @@
           <tr>
             <!--<<td><input type="checkbox" class="select-row"></td>-->
             <td><a href="#">{{ term.id }}</a></td>
-            <td>{{ term.term_start_date }}</td>
-            <td>{{ term.term_end_date }}</td>
+            <td>{{ term.start_date }}</td>
+            <td>{{ term.end_date }}</td>
             <td>{{ term.commission_rate }}</td>
-            <td>UPDATE ME</td>
+            <td>{{ term.terms }}</td>
           </tr>
           {% endfor %}
 
@@ -110,10 +133,10 @@
         <tr>
           <!--<th><input type="checkbox" class="select-all" id="selectAll"></th>-->
           <th>Id</th>
-          <th>Commencement date</th>
+          <th>Start date</th>
           <th>End Date</th>
           <th>Rent Rate</th>
-          <th>Estimate Commission</th>
+          <th>Commission</th>
         </tr>
       </thead>
       <tbody>

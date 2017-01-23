@@ -82,6 +82,12 @@
               <small class="iconav-nav-label hidden-md-up">@mdo</small>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#createModal" title="Add New" data-toggle="modal" data-placement="right" data-container="body">
+              *$*
+            </a>
+          </li>
+
         </ul>
       </div>
     </nav>
@@ -91,19 +97,29 @@
 
 
 {% block modal %}
-  <div id="docsModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+  <div id="createModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog">
     <div class="modal-content">
 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Example modal</h4>
+        <h4 class="modal-title" id="createModalLabel">What would you like to add?</h4>
       </div>
       <div class="modal-body">
-        <p>You're looking at an example modal in the dashboard theme.</p>
+        <form onsubmit='makePath(this);'>
+          <div class="form-group">
+            <label for="exampleSelect1">Select an item to add</label>
+            <select class="form-control" id="createNewSelect">
+              <option value='lease' label='Lease'/>Lease</option>
+              <option value='sale' label='Sale'/>Sale</option>
+              <option value='location' label='Location'/>Location</option>
+            </select>
+          </div>
+        </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Cool, got it!</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Create</button>
       </div>
     </div>
   </div>
@@ -120,5 +136,7 @@
       // execute/clear BS loaders for docs
       $(function(){while(window.BS&&window.BS.loader&&window.BS.loader.length){(window.BS.loader.pop())()}})
     </script>
+
+
   </body>
 </html>
