@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     #'import_export',
     'accounts',
     'taggit',
+    'widget_tweaks',
 ]
 
 
