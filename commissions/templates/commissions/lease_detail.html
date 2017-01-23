@@ -53,10 +53,10 @@
           <tr>
             <!--<th><input type="checkbox" class="select-all" id="selectAll"></th>-->
             <th>Id</th>
-            <th>UPDATE ME</th>
-            <th>UPDATE ME</th>
-            <th>UPDATE ME</th>
-            <th>UPDATE ME</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Commission</th>
+            <th>Terms</th>
           </tr>
         </thead>
         <tbody>
@@ -66,9 +66,9 @@
           <tr>
             <!--<<td><input type="checkbox" class="select-row"></td>-->
             <td><a href="#">{{ term.id }}</a></td>
-            <td>UPDATE ME</td>
-            <td>UPDATE ME</td>
-            <td>UPDATE ME</td>
+            <td>{{ term.term_start_date }}</td>
+            <td>{{ term.term_end_date }}</td>
+            <td>{{ term.commission_rate }}</td>
             <td>UPDATE ME</td>
           </tr>
           {% endfor %}

@@ -159,9 +159,9 @@ class Term(TimeStampedModel):
     Model representing terms on a lease
     """
     lease = models.ForeignKey('Lease', on_delete=models.CASCADE, null=True)
-    option_terms = models.TextField(blank=True)
-    term_start_date = models.DateField(null=True, blank=True)
-    term_end_date = models.DateField(null=True, blank=True)
+    terms = models.TextField(blank=True)
+    start_date = models.DateField(null=True, blank=True)
+    end_date = models.DateField(null=True, blank=True)
     commission_rate = models.DecimalField(decimal_places=4, default=0, max_digits=5)
 
 
