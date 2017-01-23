@@ -2,108 +2,146 @@
 
 {% block content %}
 
-   <!--<p><strong>Author:</strong> <a href="{# url 'author-detail' book.author.pk #}"> {{ book.author }} </a></p> -->
+<div class="container-fluid container-fluid-spacious">
+  <div class="dashhead mt-4">
 
-   <p><strong>Genres:</strong> <a href=""> {% for option in lease.option.all %}
-                                            {{ lease.id }}
-                                            {% if not forloop.last %}
-                                            {% endif %}
-                                            {% endfor %}
-                                </a>
-  </p>
+<div class="dashhead-titles">
+  <h6 class="dashhead-subtitle">Lease Detail</h6>
+  <h2 class="dashhead-title">{{ lease.location_name }}</h2>
+</div>
+<div class="flextable table-actions">
+  <div class="flextable-item flextable-primary">
+
+  </div>
+  <div class="flextable-item">
+    <div class="btn-group">
+      <button type="button" class="btn btn-outline-primary" href="#">
+        <span class="icon icon-pencil"></span>
+      </button>
+      <button type="button" class="btn btn-outline-primary" href="#">
+        <span class="icon icon-erase"></span>
+      </button>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+<div class="hr-divider mt-5 mb-4">
+  <h3 class="hr-divider-content hr-divider-heading">Lease Details</h3>
+</div>
+
+<p><strong>Property owner:</strong>{{ lease.property_owner_name }} </p>
+<p><strong>Asking price:</strong> {{ lease.rent_price }} </p>
+<p><strong>Size of space:</strong> {{ lease.size_of_space }} </p>
+
+
+
+
+  {% if lease.term_set %}
+  <div class="hr-divider mt-5 mb-4">
+    <h3 class="hr-divider-content hr-divider-heading">Lease Terms</h3>
+  </div>
+
+
+    <div class="container">
+
+    <div class="table-responsive">
+      <table class="table" data-sort="table">
+        <thead>
+          <tr>
+            <!--<th><input type="checkbox" class="select-all" id="selectAll"></th>-->
+            <th>Id</th>
+            <th>UPDATE ME</th>
+            <th>UPDATE ME</th>
+            <th>UPDATE ME</th>
+            <th>UPDATE ME</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          {% for term in lease.term_set.all %}
+
+          <tr>
+            <!--<<td><input type="checkbox" class="select-row"></td>-->
+            <td><a href="#">{{ term.id }}</a></td>
+            <td>UPDATE ME</td>
+            <td>UPDATE ME</td>
+            <td>UPDATE ME</td>
+            <td>UPDATE ME</td>
+          </tr>
+          {% endfor %}
+
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+  <div class="hr-divider mt-5 mb-4">
+    <h3 class="hr-divider-content hr-divider-heading">No Lease Options</h3>
+  </div>
+
+
+
+    {% endif %}
+
+
+
+
+
+
+{% if lease.option_set %}
+<div class="hr-divider mt-5 mb-4">
+  <h3 class="hr-divider-content hr-divider-heading">Lease Options</h3>
+</div>
+
+
 
 <!--      <p class="{# if copy.status == 'a' #}text-success{# elif copy.status == 'd' #}text-danger{# else #}text-warning{# endif #}">{# copy.get_status_display #}</p>
       {# if copy.status != 'a' #}<p><strong>Due back on:</strong> {# copy.due_back #}</p> {# endif #}-->
 
 
-
-
-
   <div class="container">
-        <div class="dashhead">
-  <div class="dashhead-titles">
-    <h6 class="dashhead-subtitle">Location</h6>
-    <h2 class="dashhead-title">{{ lease.location_name }}</h2>
-    <p><strong>Property owner:</strong>{{ lease.property_owner_name }} </p>
-    <p><strong>Asking price:</strong> {{ lease.rent_price }} </p>
-    <p><strong>Size of space:</strong> {{ lease.size_of_space }} </p>
-
-  </div>
-
-  <div class="btn-toolbar dashhead-toolbar">
-    <div class="btn-toolbar-item input-with-icon">
-      <input type="text" class="form-control input-block" placeholder="Search orders">
-      <span class="icon icon-magnifying-glass"></span>
-    </div>
-  </div>
-  </div>
-
-  <div class="flextable table-actions">
-    <div class="flextable-item flextable-primary">
-
-    </div>
-    <div class="flextable-item">
-      <div class="btn-group">
-        <button type="button" class="btn btn-outline-primary">
-          <span class="icon icon-pencil"></span>
-        </button>
-        <button type="button" class="btn btn-outline-primary">
-          <span class="icon icon-erase"></span>
-        </button>
-      </div>
-    </div>
-  </div>
 
 
-<h5> Lease Options </h5>
-<br/>
-<br/>
-
-<hr>
-
-
-
-    <ul>
-        {% for option in lease.option_set.all %}
-            <li>{{ option.commencement_date }}</li>
-            <p><strong>Option ID:</strong> {{ option.id }}</p>
-
-         {% endfor %}
-    </ul>
-
-
-
-
-<hr>
-<br/>
-<br/>
   <div class="table-responsive">
     <table class="table" data-sort="table">
       <thead>
         <tr>
           <!--<th><input type="checkbox" class="select-all" id="selectAll"></th>-->
-          <th>ID</th>
-          <th>Change size by</th>
-          <th>UPDATE ME</th>
-          <th>UPDATE ME</th>
-          <th>UPDATE ME</th>
+          <th>Id</th>
+          <th>Commencement date</th>
+          <th>End Date</th>
+          <th>Rent Rate</th>
+          <th>Estimate Commission</th>
         </tr>
       </thead>
       <tbody>
 
+        {% for option in lease.option_set.all %}
 
         <tr>
           <!--<<td><input type="checkbox" class="select-row"></td>-->
-          <td><a href="#">LINK HERE</a></td>
-          <td>FIELD 0</td>
-          <td>FIELD 1</td>
+          <td><a href="#">{{ option.id }}</a></td>
+          <td>{{ option.commencement_date }}</td>
+          <td>{{ option.end_date }}</td>
           <td>FIELD 2</td>
           <td>FIELD 3</td>
         </tr>
-        {# endfor #}
+        {% endfor %}
 
       </tbody>
     </table>
   </div>
+{% else %}
+<div class="hr-divider mt-5 mb-4">
+  <h3 class="hr-divider-content hr-divider-heading">No Lease Options</h3>
+</div>
+
+
+
+  {% endif %}
+
+
 
 {% endblock %}

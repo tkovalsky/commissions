@@ -1,84 +1,7 @@
+{% extends "base.html" %}
 
+{% block content %}
 
-
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <meta name="author" content="">
-
-    <title>
-      
-        Fluid &middot; 
-      
-    </title>
-
-    <link href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic" rel="stylesheet">
-    
-      <link href="../assets/css/toolkit-light.css" rel="stylesheet">
-    
-    
-    <link href="../assets/css/application.css" rel="stylesheet">
-
-    <style>
-      /* note: this is a hack for ios iframe for bootstrap themes shopify page */
-      /* this chunk of css is not part of the toolkit :) */
-      body {
-        width: 1px;
-        min-width: 100%;
-        *width: 100%;
-      }
-    </style>
-  </head>
-
-
-<body class="with-top-navbar">
-
-  <nav class="navbar navbar-fixed-top navbar-dark bg-inverse app-navbar">
-    <div class="container-fluid container-fluid-spacious">
-      <div class="navbar-header">
-        <button
-          class="navbar-toggler hidden-md-up float-right"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarResponsive"
-          aria-controls="navbarResponsive"
-          aria-expanded="false"
-          aria-label="Toggle navigation">
-        </button>
-        <a class="navbar-brand" href="../index-light/index.html">
-          <span class="icon icon-leaf navbar-brand-icon"></span>
-          Dashboard
-        </a>
-      </div>
-      <div class="collapse navbar-toggleable-sm" id="navbarResponsive">
-        <ul class="nav navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="../order-history-light/index.html">Order History</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="../fluid-light/index.html">Fluid layout</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../icon-nav-light/index.html">Icon nav</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../docs/index.html">Docs</a>
-          </li>
-        </ul>
-
-        <form class="form-inline float-right hidden-sm-down">
-          <input class="form-control" type="text" data-action="grow" placeholder="Search">
-        </form>
-
-      </div>
-    </div>
-
-  </nav>
 
   <div class="container-fluid container-fluid-spacious">
     <div class="dashhead mt-4">
@@ -268,67 +191,67 @@
       <h6 class="list-group-header">
         Countries
       </h6>
-      
+
         <a class="list-group-item list-group-item-action" href="#">
           <span class="list-group-progress" style="width: 62.4%;"></span>
           <span class="float-right text-muted">62.4%</span>
           United States
         </a>
-      
+
         <a class="list-group-item list-group-item-action" href="#">
           <span class="list-group-progress" style="width: 15.0%;"></span>
           <span class="float-right text-muted">15.0%</span>
           India
         </a>
-      
+
         <a class="list-group-item list-group-item-action" href="#">
           <span class="list-group-progress" style="width: 5.0%;"></span>
           <span class="float-right text-muted">5.0%</span>
           United Kingdom
         </a>
-      
+
         <a class="list-group-item list-group-item-action" href="#">
           <span class="list-group-progress" style="width: 5.0%;"></span>
           <span class="float-right text-muted">5.0%</span>
           Canada
         </a>
-      
+
         <a class="list-group-item list-group-item-action" href="#">
           <span class="list-group-progress" style="width: 4.5%;"></span>
           <span class="float-right text-muted">4.5%</span>
           Russia
         </a>
-      
+
         <a class="list-group-item list-group-item-action" href="#">
           <span class="list-group-progress" style="width: 2.3%;"></span>
           <span class="float-right text-muted">2.3%</span>
           Mexico
         </a>
-      
+
         <a class="list-group-item list-group-item-action" href="#">
           <span class="list-group-progress" style="width: 1.7%;"></span>
           <span class="float-right text-muted">1.7%</span>
           Spain
         </a>
-      
+
         <a class="list-group-item list-group-item-action" href="#">
           <span class="list-group-progress" style="width: 1.5%;"></span>
           <span class="float-right text-muted">1.5%</span>
           France
         </a>
-      
+
         <a class="list-group-item list-group-item-action" href="#">
           <span class="list-group-progress" style="width: 1.4%;"></span>
           <span class="float-right text-muted">1.4%</span>
           South Africa
         </a>
-      
+
         <a class="list-group-item list-group-item-action" href="#">
           <span class="list-group-progress" style="width: 1.2%;"></span>
           <span class="float-right text-muted">1.2%</span>
           Japan
         </a>
-      
+
     </div>
     <a href="#" class="btn btn-outline-primary px-3">All countries</a>
   </div>
@@ -337,57 +260,57 @@
       <h6 class="list-group-header">
         Most visited pages
       </h6>
-      
+
         <a class="list-group-item list-group-item-action" href="#">
           <span class="float-right text-muted">3,929,481</span>
           / (Logged out)
         </a>
-      
+
         <a class="list-group-item list-group-item-action" href="#">
           <span class="float-right text-muted">1,143,393</span>
           / (Logged in)
         </a>
-      
+
         <a class="list-group-item list-group-item-action" href="#">
           <span class="float-right text-muted">938,287</span>
           /tour
         </a>
-      
+
         <a class="list-group-item list-group-item-action" href="#">
           <span class="float-right text-muted">749,393</span>
           /features/something
         </a>
-      
+
         <a class="list-group-item list-group-item-action" href="#">
           <span class="float-right text-muted">695,912</span>
           /features/another-thing
         </a>
-      
+
         <a class="list-group-item list-group-item-action" href="#">
           <span class="float-right text-muted">501,938</span>
           /users/username
         </a>
-      
+
         <a class="list-group-item list-group-item-action" href="#">
           <span class="float-right text-muted">392,842</span>
           /page-title
         </a>
-      
+
         <a class="list-group-item list-group-item-action" href="#">
           <span class="float-right text-muted">298,183</span>
           /some/page-slug
         </a>
-      
+
         <a class="list-group-item list-group-item-action" href="#">
           <span class="float-right text-muted">193,129</span>
           /another/directory/and/page-title
         </a>
-      
+
         <a class="list-group-item list-group-item-action" href="#">
           <span class="float-right text-muted">93,382</span>
           /one-more/page/directory/file-name
         </a>
-      
+
     </div>
     <a href="#" class="btn btn-outline-primary px-3">View all pages</a>
   </div>
@@ -396,57 +319,57 @@
       <h6 class="list-group-header">
         Devices and resolutions
       </h6>
-      
+
         <a class="list-group-item list-group-item-action" href="#">
           <span class="float-right text-muted">3,929,481</span>
           Desktop (1920x1080)
         </a>
-      
+
         <a class="list-group-item list-group-item-action" href="#">
           <span class="float-right text-muted">1,143,393</span>
           Desktop (1366x768)
         </a>
-      
+
         <a class="list-group-item list-group-item-action" href="#">
           <span class="float-right text-muted">938,287</span>
           Desktop (1440x900)
         </a>
-      
+
         <a class="list-group-item list-group-item-action" href="#">
           <span class="float-right text-muted">749,393</span>
           Desktop (1280x800)
         </a>
-      
+
         <a class="list-group-item list-group-item-action" href="#">
           <span class="float-right text-muted">695,912</span>
           Tablet (1024x768)
         </a>
-      
+
         <a class="list-group-item list-group-item-action" href="#">
           <span class="float-right text-muted">501,938</span>
           Tablet (768x1024)
         </a>
-      
+
         <a class="list-group-item list-group-item-action" href="#">
           <span class="float-right text-muted">392,842</span>
           Phone (320x480)
         </a>
-      
+
         <a class="list-group-item list-group-item-action" href="#">
           <span class="float-right text-muted">298,183</span>
           Phone (720x450)
         </a>
-      
+
         <a class="list-group-item list-group-item-action" href="#">
           <span class="float-right text-muted">193,129</span>
           Desktop (2560x1080)
         </a>
-      
+
         <a class="list-group-item list-group-item-action" href="#">
           <span class="float-right text-muted">93,382</span>
           Desktop (2560x1600)
         </a>
-      
+
     </div>
     <a href="#" class="btn btn-outline-primary px-3">View all pages</a>
   </div>
@@ -466,4 +389,3 @@
     </script>
   </body>
 </html>
-

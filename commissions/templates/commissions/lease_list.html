@@ -1,27 +1,273 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container">
 
-    <h1>Lease List</h1>
+
+
+    <div class="container-fluid container-fluid-spacious">
+      <div class="dashhead mt-4">
+
+    <div class="dashhead-titles">
+      <h6 class="dashhead-subtitle">Leases</h6>
+      <h2 class="dashhead-title">Overview</h2>
+    </div>
+    <div class="btn-toolbar dashhead-toolbar">
+      <div class="btn-toolbar-item input-with-icon">
+        <input type="text" value="01/01/15 - 01/08/15" class="form-control" data-provide="datepicker">
+        <span class="icon icon-calendar"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hr-divider mt-3 mb-5">
+    <h3 class="hr-divider-content hr-divider-heading">Quick stats</h3>
+  </div>
+
+  <div class="row statcards">
+    <div class="col-md-6 col-lg-3 mb-5 mb-md-3">
+      <div class="statcard">
+        <div class="p-a">
+          <span class="statcard-desc">Page views</span>
+          <h2 class="statcard-number">
+            12,938
+            <small class="badge badge-success">5%</small>
+          </h2>
+        </div>
+        <canvas id="sparkline1" width="378" height="94" class="sparkline"
+        data-chart="spark-line"
+        data-dataset="[[28,68,41,43,96,45,100]]"
+        data-dataset-options="[{borderColor: '#1ca8dd', backgroundColor:'rgba(66,165,245,.2)'}]"
+        data-labels="['a','b','c','d','e','f','g']"
+        style="width: 189px; height: 47px;"></canvas>
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-3 mb-5 mb-md-3">
+      <div class="statcard">
+        <div class="p-a">
+          <span class="statcard-desc">Downloads</span>
+          <h2 class="statcard-number">
+            758
+            <small class="badge badge-danger">1.3%</small>
+          </h2>
+        </div>
+        <canvas id="sparkline1" width="378" height="94" class="sparkline"
+        data-chart="spark-line"
+        data-dataset="[[4,34,64,27,96,50,80]]"
+        data-dataset-options="[{borderColor: '#1ca8dd', backgroundColor:'rgba(66,165,245,.2)'}]"
+        data-labels="['a','b','c','d','e','f','g']"
+        style="width: 189px; height: 47px;"></canvas>
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-3 mb-5 mb-md-3">
+      <div class="statcard">
+        <div class="p-a">
+          <span class="statcard-desc">Sign-ups</span>
+          <h2 class="statcard-number">
+            1,293
+            <small class="badge badge-success">6.75%</small>
+          </h2>
+        </div>
+        <canvas id="sparkline1" width="378" height="94" class="sparkline"
+           data-chart="spark-line"
+           data-dataset="[[12,38,32,60,36,54,68]]"
+           data-dataset-options="[{borderColor: '#1ca8dd', backgroundColor:'rgba(66,165,245,.2)'}]"
+           data-labels="['a','b','c','d','e','f','g']"
+           style="width: 189px; height: 47px;"></canvas>
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-3 mb-5 mb-md-3">
+      <div class="statcard">
+        <div class="p-a">
+          <span class="statcard-desc">Downloads</span>
+          <h2 class="statcard-number">
+            758
+            <small class="badge badge-success">1.3%</small>
+          </h2>
+        </div>
+        <canvas id="sparkline1" width="378" height="94" class="sparkline"
+          data-chart="spark-line"
+          data-dataset="[[43,48,52,58,50,95,100]]"
+          data-dataset-options="[{borderColor: '#1ca8dd', backgroundColor:'rgba(66,165,245,.2)'}]"
+          data-labels="['a','b','c','d','e','f','g']"
+          style="width: 189px; height: 47px;"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="hr-divider my-4">
+    <ul class="nav nav-pills hr-divider-content hr-divider-nav" role="tablist">
+      <li class="nav-item" role="presentation">
+        <a href="#sales" class="nav-link active" role="tab" data-toggle="tab" aria-controls="sales">Revenue</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a href="#inventory" class="nav-link" role="tab" data-toggle="tab" aria-controls="inventory">Inventory</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a href="#profit" class="nav-link" role="tab" data-toggle="tab" aria-controls="profit">Profit</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="sales">
+      <div class="ex-line-graphs">
+         <canvas
+          class="ex-line-graph"
+          width="600" height="350"
+          data-chart="line"
+          data-dataset="[[2500, 3300, 2512, 2775, 2498, 3512, 2925, 4275, 3507, 3825, 3445, 3985]]"
+          data-labels="['','Aug 29','','','Sept 5','','','Sept 12','','','Sept 19','']">
+        </canvas>
+      </div>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="inventory">
+      <div class="ex-line-graphs">
+        <canvas
+          class="ex-line-graph"
+          width="600" height="400"
+          data-chart="bar"
+          data-labels="['August','September','October','November','December','January','February']"
+          data-dataset="[[65, 59, 80, 81, 56, 55, 40], [28, 48, 40, 19, 86, 27, 90]]"
+          data-dataset-options="[{label: 'First dataset'}, {label: 'Second dataset'}]">
+        </canvas>
+      </div>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="profit">
+      <div class="row ex-graphs text-center">
+        <div class="col-sm-4 mb-4 mb-sm-0">
+          <div class="w-3 mx-auto">
+            <canvas
+              class="ex-graph"
+              width="200" height="200"
+              data-chart="doughnut"
+              data-dataset="[230, 130]"
+              data-dataset-options="{ backgroundColor: ['#1ca8dd', '#1bc98e'] }"
+              data-labels="['Returning', 'New']">
+            </canvas>
+          </div>
+          <strong class="text-muted">Traffic</strong>
+          <h3>New vs Returning</h3>
+        </div>
+        <div class="col-sm-4 mb-4 mb-sm-0">
+          <div class="w-3 mx-auto">
+            <canvas
+              class="ex-graph"
+              width="200" height="200"
+              data-chart="doughnut"
+              data-dataset="[330, 30]"
+              data-dataset-options="{ backgroundColor: ['#1ca8dd', '#1bc98e'] }"
+              data-labels="['Returning', 'New']">
+            </canvas>
+          </div>
+          <strong class="text-muted">Revenue</strong>
+          <h3>New vs Recurring</h3>
+        </div>
+        <div class="col-sm-4 mb-4 mb-sm-0">
+          <div class="w-3 mx-auto">
+            <canvas
+              class="ex-graph"
+              width="200" height="200"
+              data-chart="doughnut"
+              data-dataset="[100, 260]"
+              data-dataset-options="{ backgroundColor: ['#1ca8dd', '#1bc98e'] }"
+              data-labels="['Referrals', 'Direct']"
+              >
+            </canvas>
+          </div>
+          <strong class="text-muted">Traffic</strong>
+          <h3>Direct vs Referrals</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hr-divider mt-5 mb-4">
+    <h3 class="hr-divider-content hr-divider-heading">Pipeline</h3>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-4 mb-5">
+      <div class="list-group mb-3">
+        <h6 class="list-group-header">
+          Recently closed
+        </h6>
 
     {% if lease_list %}
-    <ul>
+
+    {% for lease in lease_list %}
 
 
-      {% for lease in lease_list %}
 
-        <a href="{{ lease.get_absolute_url }}"> {{ lease.property_owner_name }} 
-          {{ lease.get_aggregate_lease_commission }}
-          <!--<span class="float-right text-muted">{{ lease.get_aggregate_lease_commission }}</span>-->
-          {{ lease.property_owner_name }}
-        </a>
-        <hr>
-      {% endfor %}
-    </ul>
+          <a class="list-group-item list-group-item-action" href="{{ lease.get_absolute_url }}">
+            <span class="list-group-progress" style="width: 100.0%;"></span>
+            <span class="float-right text-muted">${{ lease.get_aggregate_lease_commission }}</span>
+            {{ lease.location_name }}
+          </a>
+{% endfor %}
+{% else %}
+  <p>There are no leases entered.</p>
+{% endif %}
+
+      </div>
+      <a href="#" class="btn btn-outline-primary px-3">All countries</a>
+    </div>
+    <div class="col-lg-4 mb-5">
+      <div class="list-group mb-3">
+        <h6 class="list-group-header">
+          In Progress
+        </h6>
+        {% if lease_list %}
+
+        {% for lease in lease_list %}
+
+
+
+              <a class="list-group-item list-group-item-action" href="{{ lease.get_absolute_url }}">
+                <span class="list-group-progress" style="width: 100.0%;"></span>
+                <span class="float-right text-muted">${{ lease.get_aggregate_lease_commission }}</span>
+                {{ lease.location_name }}
+              </a>
+    {% endfor %}
     {% else %}
       <p>There are no leases entered.</p>
     {% endif %}
 
-</div>
-{% endblock %}
+
+      </div>
+      <a href="#" class="btn btn-outline-primary px-3">View all pages</a>
+    </div>
+    <div class="col-lg-4 mb-5">
+      <div class="list-group mb-3">
+        <h6 class="list-group-header">
+          Prospects
+        </h6>
+
+        {% if lease_list %}
+
+        {% for lease in lease_list %}
+
+
+
+              <a class="list-group-item list-group-item-action" href="{{ lease.get_absolute_url }}">
+                <span class="list-group-progress" style="width: 100.0%;"></span>
+                <span class="float-right text-muted">${{ lease.get_aggregate_lease_commission }}</span>
+                {{ lease.location_name }}
+              </a>
+    {% endfor %}
+    {% else %}
+      <p>There are no leases entered.</p>
+    {% endif %}
+
+
+      </div>
+      <a href="#" class="btn btn-outline-primary px-3">View all pages</a>
+    </div>
+  </div>
+
+
+
+
+
+      {% endblock %}
