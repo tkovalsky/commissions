@@ -25,6 +25,21 @@ BUSINESS_TYPE = (
     ('cafe', 'Cafe'),
     )
 
+LEASE_WORKFLOW_STATUS = (
+    ('0', 'New'),
+    ('25', 'Prospect'),
+    ('50', 'Signed LOI'),
+    ('75', 'Signed Lease'),
+    ('100', 'Closed'),
+    )
+
+SALE_WORKFLOW_STATUS = (
+    ('0', 'New'),
+    ('25', 'Prospect'),
+    ('50', 'Signed LOI'),
+    ('75', 'Signed Contract'),
+    ('100', 'Closed'),
+    )
 
 
 class Sale(TimeStampedModel):
@@ -35,6 +50,7 @@ class Sale(TimeStampedModel):
     #***buyer_name = models.CharField(max_length=80, validators=[validate_content]) ***this will call the validate_content function above
     seller_name = models.CharField(max_length=80, blank=True)
     location_name = models.CharField(max_length=120, blank=True)
+    status = models.CharField(max_length=3, choices=SALE_WORKFLOW_STATUS, blank=True, default=0, help_text="Workflow status")
     transaction_close_date = models.DateField("close date", blank=True, null=True)
     asking_price = models.DecimalField(decimal_places=2, null=False, blank=False, max_digits=20, default=0)
     contract_execution_date = models.DateField("contract signed on", blank=True, null=True)
@@ -92,6 +108,7 @@ class Lease(TimeStampedModel):
     """
     tenant_name = models.CharField(max_length=80, blank=True)
     property_owner_name = models.CharField(max_length=80)
+    status = models.CharField(max_length=3, choices=LEASE_WORKFLOW_STATUS, blank=True, default=0, help_text="Workflow status")
     location_name = models.CharField(max_length=120)
     signed_lease_date = models.DateField(null=True, blank=True)
     lease_term_in_months = models.IntegerField("lease term", null=True, blank=True)
@@ -152,8 +169,6 @@ class Lease(TimeStampedModel):
     #display_option.option_commencement_date = 'Option Start Date'
 
     class Meta:
-        verbose_name = ("Lease")
-        verbose_name_plural = ("Leases")
         ordering = ("-created",)
 
 class Term(TimeStampedModel):

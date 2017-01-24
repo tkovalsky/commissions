@@ -34,11 +34,89 @@
   <h3 class="hr-divider-content hr-divider-heading">Lease Details</h3>
 </div>
 -->
-<p><strong>Property owner:</strong>{{ lease.property_owner_name }} </p>
-<p><strong>Asking price:</strong> {{ lease.rent_price }} </p>
-<p><strong>Size of space:</strong> {{ lease.size_of_space }} </p>
+<ul>
+  <li><strong>Property owner:</strong> {{ lease.property_owner_name }}
+  <li><strong>Property owner:</strong> {{ lease.property_owner_name }}
+  <li><strong>Asking price:</strong> {{ lease.rent_price }}
+  <li><strong>Size of space:</strong> {{ lease.size_of_space }}
+  <li><strong>Lease term:</strong> {{ lease.lease_term_in_months }}</li>
+  <li><strong>size_of_space:</strong> {{ lease.size_of_space }}</li>
+  <li><strong>rent_price:</strong> {{ lease.rent_price }}</li>
+  <li><strong>deal_commission_rate:</strong> {{ lease.deal_commission_rate }}</li>
+  <li><strong>aggregate_lease_commission:</strong> {{ lease.get_aggregate_lease_commission }}</li>
+  <li><strong>house_broker_commission_rate:</strong> {{ lease.house_broker_commission_rate }}</li>
+  <li><strong>outside_broker_commission_rate:</strong> {{ lease.outside_broker_commission_rate }}</li>
+  <li><strong>commission_payout_terms:</strong> {{ lease.commission_payout_terms }}</li>
+  <li><strong>Status:</strong> {{ lease.status }}</li>
+  <li><strong>permit_type:</strong> {{ lease.permit_type }}</li>
+  <li><strong>notes:</strong> {{ lease.notes }}</li>
+  <li><strong>added_by:</strong> {{ lease.added_by }}</li>
 
 
+
+
+
+
+
+
+  <li><strong>contingencies:</strong> {{ lease.contingencies }}</li>
+                        <li>{{ lease.contingency_time_in_days }}</li>
+  <li><strong>added_by:</strong> {{ lease.added_by }}</li>
+
+    <hr>
+    <strong>Dates</strong>
+    <li><strong>Signed Lease Date:</strong> {{ lease.signed_lease_date }}</li>
+    <li><strong>lease_execution_date:</strong> {{ lease.lease_execution_date }}</li>
+    <li><strong>lease_expiration_date:</strong> {{ lease.lease_expiration_date }}</li>
+    <li><strong>contingency_start_date:</strong> {{ lease.contingency_start_date }}</li>
+    <li><strong>contingency_end_date:</strong> {{ lease.contingency_end_date }}</li>
+    <li><strong>rent_commencement_date:</strong> {{ lease.rent_commencement_date }}</li>
+    <li><strong>occupancy_date:</strong> {{ lease.occupancy_date }}</li>
+    <br/>
+    <hr>
+
+    <strong>Terms</strong>
+    <li><strong>landlord_broker:</strong> {{ lease.landlord_broker }}</li>
+    <li><strong>tenant_broker:</strong> {{ lease.tenant_broker }}</li>
+    <li><strong>house_broker:</strong> {{ lease.house_broker }}</li>
+    <li><strong>contingency_start_date:</strong> {{ lease.contingency_start_date }}</li>
+    <li><strong>contingency_end_date:</strong> {{ lease.contingency_end_date }}</li>
+    <li><strong>rent_commencement_date:</strong> {{ lease.rent_commencement_date }}</li>
+
+    <br/>
+    <hr>
+    <strong>Brokers</strong>
+    <li><strong>landlord_broker:</strong> {{ lease.landlord_broker }}</li>
+    <li><strong>tenant_broker:</strong> {{ lease.tenant_broker }}</li>
+    <li><strong>house_broker:</strong> {{ lease.house_broker }}</li>
+    <li><strong>contingency_start_date:</strong> {{ lease.contingency_start_date }}</li>
+    <li><strong>contingency_end_date:</strong> {{ lease.contingency_end_date }}</li>
+    <li><strong>rent_commencement_date:</strong> {{ lease.rent_commencement_date }}</li>
+    <br/>
+    <hr>
+    <strong>Outside Brokers</strong>
+    <li><strong>outside_broker_contact:</strong> {{ lease.outside_broker_contact }}</li>
+    <li><strong>outside_broker_contact_address:</strong> {{ lease.outside_broker_contact_address }}</li>
+    <li><strong>outside_broker_contact_phone_number:</strong> {{ lease.outside_broker_contact_phone_number }}</li>
+    <li><strong>outside_broker_email_address:</strong> {{ lease.outside_broker_email_address }}</li>
+    <li><strong>outside_broker_w9_on_file:</strong> {{ lease.outside_broker_w9_on_file }}</li>
+    <br/>
+    <hr>
+    <strong>Invoice</strong>
+    <li><strong>send_invoice_to:</strong> {{ lease.send_invoice_to }}</li>
+    <li><strong>contact_person:</strong> {{ lease.contact_person }}</li>
+    <li><strong>invoice_address:</strong> {{ lease.invoice_address }}</li>
+    <li><strong>invoice_city:</strong> {{ lease.invoice_city }}</li>
+    <li><strong>invoice_state:</strong> {{ lease.invoice_state }}</li>
+    <li><strong>invoice_zip:</strong> {{ lease.invoice_zip }}</li>
+    <li><strong>invoice_phone:</strong> {{ lease.invoice_phone }} </li>
+
+
+
+
+
+
+    <hr>
 
 
   {% if lease.term_set %}
