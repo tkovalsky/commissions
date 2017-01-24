@@ -158,8 +158,8 @@
          <h6 class="list-group-header">
            Sales
          </h6>
-         {% if sale_list %}
-         {% for sale in sale_list %}
+         {% if recent_closed_sales %}
+         {% for sale in recent_closed_sales %}
 
            <a class="list-group-item list-group-item-action" href="href="{{ sale.get_absolute_url }}">
              <span class="list-group-progress" style="width: 62.4%;"></span>
@@ -184,8 +184,8 @@
          <h6 class="list-group-header">
            Leases
          </h6>
-         {% if lease_list %}
-         {% for lease in lease_list %}
+         {% if recent_closed_leases %}
+         {% for lease in recent_closed_leases %}
 
            <a class="list-group-item list-group-item-action" href="{{ lease.get_absolute_url }}">
              <span class="float-right text-muted">{{ get_aggregate_lease_commission }}</span>

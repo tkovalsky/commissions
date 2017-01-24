@@ -35,8 +35,9 @@ class LeaseAdmin(admin.ModelAdmin):
 
     list_filter = ['created']
     list_display = ['location_name','property_owner_name', 'tenant_name', 'size_of_space', 'rent_price', 'get_aggregate_lease_commission']
-    fields = ['location_name','size_of_space','rent_price', 'lease_term_in_months',
-                ('signed_lease_date','rent_commencement_date', 'occupancy_date', 'lease_expiration_date'),
+    fields = ['tenant_name','property_owner_name','location_name','size_of_space','rent_price', 'lease_term_in_months',
+                ('signed_lease_date','rent_commencement_date', 'occupancy_date', 'lease_execution_date','lease_expiration_date',
+                                        'contingency_start_date', 'contingency_end_date', ),
                 ('rent_rate_factor', 'deal_commission_rate','commission_payout_terms',),
                 ('tenant_broker'),
                 ('outside_broker_contact','outside_broker_w9_on_file', 'outside_broker_email_address',

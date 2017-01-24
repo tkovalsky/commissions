@@ -10,6 +10,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from itertools import chain
+from operator import attrgetter
+
 
 from .forms import AddSaleForm, AddLeaseForm, AddLocationForm
 
@@ -96,10 +99,28 @@ class AddLocationView(CreateView):
     model = Location
     fields = '__all__'
 
+
+
+class DashboardView(generic.ListView):
+    template_name  = 'index.html'
+    queryset = Lease.objects.all() #OR Sale.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(DashboardView, self).get_context_data(**kwargs)
+        context['leases'] = Lease.objects.all()
+        context['sales'] = Sale.objects.all()
+        return context
+
+
+
+
 def index(request):
     """
-    View function for the home page of this site
+    function based view  for the home page of this site
     """
+    recent_closed_leases=Lease.objects.all()[:5]
+    recent_closed_sales=Sale.objects.all()[:5]
+
     #Generate counts for some main objects
 #    num_deals=Deal.objects.all().count()
     num_leases=Lease.objects.all().count()
@@ -115,6 +136,8 @@ def index(request):
         request,
         'index.html',
         context={
+            'recent_closed_leases':recent_closed_leases,
+            'recent_closed_sales':recent_closed_sales,
             'num_sales':num_sales,
             'num_leases':num_leases,
         },

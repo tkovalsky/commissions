@@ -4,7 +4,9 @@ from django.conf import settings
 from django.db import models
 from django_extensions.db.models import TimeStampedModel
 from django.urls import reverse
+from itertools import chain
 from taggit.managers import TaggableManager
+
 
 
 from . import managers
@@ -170,7 +172,7 @@ class Term(TimeStampedModel):
         ordering = ['created']
 
     def __str__(self):
-        return '%s - %s' % (self.term_start_date, self.term_end_date)
+        return '%s - %s' % (self.start_date, self.end_date)
 
 
 
