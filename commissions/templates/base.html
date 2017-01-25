@@ -35,65 +35,78 @@
 </head>
 
 <body>
-  <div class="with-iconav">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 sidebar">
+        <nav class="sidebar-nav">
+          <div class="sidebar-header">
+            <button class="nav-toggler nav-toggler-md sidebar-toggler" type="button" data-toggle="collapse" data-target="#nav-toggleable-md">
+              <span class="sr-only">Toggle nav</span>
+            </button>
+            <a class="sidebar-brand img-responsive" href="{% url 'index' %}">
+              <span class="icon icon-leaf sidebar-brand-icon"></span>
+            </a>
+          </div>
 
-    <nav class="iconav">
-      <a class="iconav-brand" href="{% url 'index' %}">
-        <span class="icon icon-leaf iconav-brand-icon"></span>
-      </a>
-      <div class="iconav-slider">
-        <ul class="nav nav-pills iconav-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'index' %}" title="Home" data-toggle="tooltip" data-placement="right" data-container="body">
-              <span class="icon icon-home"></span>
-              <small class="iconav-nav-label hidden-md-up">Home</small>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'sales' %}" title="Sales" data-toggle="tooltip" data-placement="right" data-container="body">
-              <span class="icon icon-text-document"></span>
-              <small class="iconav-nav-label hidden-md-up">Sales</small>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'leases' %}" title="Leases" data-toggle="tooltip" data-placement="right" data-container="body">
-              <span class="icon icon-globe"></span>
-              <small class="iconav-nav-label hidden-md-up">Leases</small>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" title="Tenant Reps" data-toggle="tooltip" data-placement="right" data-container="body">
-              <span class="icon icon-home"></span>
-              <small class="iconav-nav-label hidden-md-up">Tenant Reps</small>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'locations' %}" title="Research" data-toggle="tooltip" data-placement="right" data-container="body">
-              <span class="icon icon-home"></span>
-              <small class="iconav-nav-label hidden-md-up">Research</small>
-            </a>
-          </li>
+          <div class="collapse nav-toggleable-md" id="nav-toggleable-md">
+            <form class="sidebar-form">
+              <input class="form-control" type="text" placeholder="Search...">
+              <button type="submit" class="btn-link">
+                <span class="icon icon-magnifying-glass"></span>
+              </button>
+            </form>
+            <ul class="nav nav-pills nav-stacked">
+              <li class="nav-header">Dashboard</li>
+              <li class="nav-item">
+                <a class="nav-link active" href="href="{% url 'index' %}">Overview</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="{% url 'sales' %}">Sales</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="{% url 'leases' %}">Leases</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="#">Tenant Reps</a>
+              </li>
 
+              <li class="nav-header">Create New</li>
+              <li class="nav-item">
+                <a class="nav-link "href="{% url 'sale-create' %}">
+                  Sale
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link "href="{% url 'lease-create' %}">
+                  Lease
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="#">Tenant Rep</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="{% url 'locations' %}">Location</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="#">Contact</a>
+              </li>
 
-<!-- logged in user-->
-          <li class="nav-item">
-            <a class="nav-link" href="#" title="Signed in as mdo" data-toggle="tooltip" data-placement="right" data-container="body">
-              <img src="../assets/img/avatar-mdo.png" alt="" class="rounded-circle">
-              <small class="iconav-nav-label hidden-md-up">@mdo</small>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#createModal" title="Add New" data-toggle="modal" data-placement="right" data-container="body">
-              *$*
-            </a>
-          </li>
-
-        </ul>
+              <!--modal nav item-->
+              <!--<li class="nav-item">-->
+                <!--<a class="nav-link" href="#docsModal" data-toggle="modal">-->
+                  <!--Example modal-->
+              <!--  </a>-->
+              <!--</li>-->
+            </ul>
+            <hr class="visible-xs mt-3">
+          </div>
+        </nav>
       </div>
-    </nav>
-  </div>
-  </div>
 
+
+
+<div class="col-md-9 content">
+<div class="dashhead">
 
 {% block content %}{% endblock content %}
 
@@ -101,6 +114,8 @@
 {% block modal %}
 
 {% endblock modal %}
+</div>
+</div>
 
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/tether.min.js' %}"></script>
