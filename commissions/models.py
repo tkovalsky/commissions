@@ -14,7 +14,6 @@ from . import managers
 #you can define a list of validations in a file (e.g. validators.py) and import it here, then add as an argument to the model
 #from .validators import validate_content
 
-MyUser = settings.AUTH_USER_MODEL
 
 BUSINESS_TYPE = (
     ('nc', 'Not Classified'),
@@ -77,7 +76,7 @@ class Sale(TimeStampedModel):
     outside_broker_email_address = models.EmailField(blank=True)
     outside_broker_w9_on_file = models.BooleanField(default=False)
     notes = models.TextField(blank=True)
-    added_by = models.ForeignKey(MyUser) #this is not working as expected.  Username not pulling thru in admin
+    #added_by = models.ForeignKey(User) #this is not working as expected.  Username not pulling thru in admin
 
     def __str__(self):
         return self.location_name
@@ -144,7 +143,7 @@ class Lease(TimeStampedModel):
     notes = models.TextField(blank=True)
     contingency_time_in_days = models.IntegerField(null=True, blank=True, default=0)
     permit_type = models.CharField(max_length=100, blank=True)
-    added_by = models.ForeignKey(MyUser, blank=True, null=True)
+    #added_by = models.ForeignKey(MyUser, blank=True, null=True)
 
     def __str__(self):
         return self.location_name
@@ -274,7 +273,7 @@ class Tenant(TimeStampedModel):
     notes = models.TextField(blank=True)
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
     date_modified = models.DateTimeField("last modified", auto_now=True, auto_now_add=False)
-    added_by = models.ForeignKey(MyUser, blank=True, null=True)
+    #added_by = models.ForeignKey(User, blank=True, null=True)
 
     def __str__(self):
         return self.name_of_company

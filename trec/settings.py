@@ -25,35 +25,34 @@ SECRET_KEY = 'mn-d^04i*9o25va(1waifw^6bsbdyq)a)c31$592m96p8fzb&b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
 INSTALLED_APPS = [
-    'commissions.apps.CommissionsConfig',
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'commissions.apps.CommissionsConfig',
+    'registration', #should be immediately above 'django.contrib.auth'
+    'django.contrib.admin',
     'crispy_forms',
     #'import_export',
-    'accounts',
     'taggit',
     'widget_tweaks',
+    'debug_toolbar',
 ]
-
-
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -79,7 +78,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'trec.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
@@ -89,7 +87,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -115,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/New_York'
 
 USE_I18N = True
 
@@ -135,28 +132,39 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
     )
 
+# django-registration-redux settings
+REGISTRATION_OPEN = True
 ACCOUNT_ACTIVATION_DAYS = 7
+REGISTRATION_AUTO_LOGIN = True # Automatically log the user in.
+LOGIN_REDIRECT_URL = "index"
+LOGIN_URL = '/accounts/login/'
 
+# email settings
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
 DEFAULT_FROM_EMAIL = 'testing@example.com'
-
 EMAIL_HOST_USER = ''
-
 EMAIL_HOST_PASSWORD = ''
-
 EMAIL_USE_TLS = False
-
 EMAIL_PORT = 1025
 
-#LOGIN_REDIRECT_URL = "home"
 
+# django crispy forms settings
 #CRISPY_TEMPLATE_PACK = 'uni_form'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 #here is a link to aguide on django import export module - https://simpleisbetterthancomplex.com/packages/2016/08/11/django-import-export.html
 
+# django import export settings - not implemented
 #IMPORT_EXPORT_USE_TRANSACTIONS = True
 
-#AUTH_USER_MODEL = 'customauth.MyUser'
-AUTH_USER_MODEL = 'accounts.MyUser'
+# django sites framework settings
+SITE_ID = 1
+
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.DEBUG: 'alert-info',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
+}

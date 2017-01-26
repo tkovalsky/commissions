@@ -1,21 +1,21 @@
+{% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
+    <title>{% block title %}{% endblock title %}</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="">
 
-		{% block title %} <title> Commission Tracker </title> {% endblock %}
 
     <link href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic" rel="stylesheet">
 
 	<!--additional css -->
-	{% load static %}
 	<link rel="stylesheet" href="{% static 'css/toolkit-light.css' %}">
 	<link rel="stylesheet" href="{% static 'css/application.css' %}">
 	<link rel="stylesheet" href="{% static 'css/docs.css' %}">
@@ -36,8 +36,10 @@
 
 <body>
   <div class="container">
+    {% block body %}
     <div class="row">
       <div class="col-md-3 sidebar">
+      {% block sidebar %}
         <nav class="sidebar-nav">
           <div class="sidebar-header">
             <button class="nav-toggler nav-toggler-md sidebar-toggler" type="button" data-toggle="collapse" data-target="#nav-toggleable-md">
@@ -101,12 +103,16 @@
             <hr class="visible-xs mt-3">
           </div>
         </nav>
+        {% endblock sidebar %}
       </div>
 
 
 
 <div class="col-md-9 content">
+
 <div class="dashhead">
+
+{% include 'messages.html' %}
 
 {% block content %}{% endblock content %}
 
@@ -115,6 +121,7 @@
 
 {% endblock modal %}
 </div>
+{% endblock body %}
 </div>
 
     <script src="{% static 'js/jquery.min.js' %}"></script>
