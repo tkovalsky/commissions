@@ -19,7 +19,8 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.views.generic import RedirectView
+from django.views.generic import RedirectView, TemplateView
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -29,7 +30,8 @@ urlpatterns = [
 
 urlpatterns += [
     url(r'^commissions/', include('commissions.urls')),
-    url(r'^$', RedirectView.as_view(url='/commissions', permanent=True)),
+    url(r'^$', TemplateView.as_view(template_name='home.html')),
+    #url(r'^$', RedirectView.as_view(url='/commissions', permanent=True)),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -111,7 +111,8 @@ class DashboardView(generic.ListView):
         context['sales'] = Sale.objects.all()
         return context
 
-
+class MarketingPageView(generic.TemplateView):
+    template_name  = 'home.html'
 
 
 def index(request):
