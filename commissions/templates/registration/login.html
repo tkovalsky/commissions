@@ -4,10 +4,6 @@
 
 {% block title %}{% trans "Log in" %}{% endblock %}
 
-{% block sidebar %}
-{% endblock sidebar %}
-
-
 
 {% block body %}
 
@@ -20,7 +16,9 @@
        {{ form|crispy }}
 
        </div>
-       <button type="button" class="btn btn-outline-primary btn-block" type="submit" value="{% trans 'Log in' %}">Sign in</button>
+       <input type="submit" value="{% trans 'Log in' %}" />
+       <input type="hidden" name="next" value="{{ next }}" />
+
      </form>
      <p>{% trans "Forgot your password?" %} <a href="{% url 'auth_password_reset' %}">{% trans "Reset it" %}</a>.</p>
      <p>{% trans "Not a member?" %} <a href="{% url 'registration_register' %}">{% trans "Register" %}</a>.</p>
