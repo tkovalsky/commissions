@@ -35,7 +35,7 @@
 -->
 <ul>
   <li><strong>Property owner:</strong> {{ lease.property_owner_name }}
-  <li><strong>Property owner:</strong> {{ lease.property_owner_name }}
+  <li><strong>Tenant:</strong> {{ lease.tenant_name }}
   <li><strong>Asking price:</strong> {{ lease.rent_price }}
   <li><strong>Size of space:</strong> {{ lease.size_of_space }}
   <li><strong>Lease term:</strong> {{ lease.lease_term_in_months }}</li>
@@ -82,6 +82,8 @@
     <li><strong>contingency_end_date:</strong> {{ lease.contingency_end_date }}</li>
     <li><strong>rent_commencement_date:</strong> {{ lease.rent_commencement_date }}</li>
 
+
+
     <br/>
     <hr>
     <strong>Brokers</strong>
@@ -116,8 +118,7 @@
 
 
     <hr>
-
-
+    
   {% if lease.term_set %}
   <div class="hr-divider mt-5 mb-4">
     <h3 class="hr-divider-content hr-divider-heading">Lease Terms</h3>
@@ -135,7 +136,7 @@
             <th>Start Date</th>
             <th>End Date</th>
             <th>Commission (%)</th>
-            <th>Terms</th>
+            <th>Term Commission</th>
           </tr>
         </thead>
         <tbody>
@@ -148,7 +149,7 @@
             <td>{{ term.start_date }}</td>
             <td>{{ term.end_date }}</td>
             <td>{{ term.commission_rate }}</td>
-            <td>{{ term.terms }}</td>
+            <td>{{ term.get_term_commission }}</td>
           </tr>
           {% endfor %}
 

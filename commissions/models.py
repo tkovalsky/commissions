@@ -180,14 +180,15 @@ class Term(TimeStampedModel):
     end_date = models.DateField(null=True, blank=True)
     commission_rate = models.DecimalField(decimal_places=4, default=0, max_digits=5)
 
-
+    def __str__(self):
+        return '%s - %s' % (self.start_date, self.end_date)
 
     class Meta:
         ordering = ['created']
 
-    def __str__(self):
-        return '%s - %s' % (self.start_date, self.end_date)
-
+    @property
+    def get_term_commission(self):
+        return float(self.lease.size_of_space) * float(self.lease.rent_price) * float(self.commission_rate) * float(self.lease.rent_rate_factor)
 
 
 class Option(models.Model):
