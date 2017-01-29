@@ -175,6 +175,7 @@ class Term(TimeStampedModel):
     Model representing terms on a lease
     """
     lease = models.ForeignKey('Lease', on_delete=models.CASCADE, null=True)
+    sale = models.ForeignKey('Sale', on_delete=models.CASCADE, null=True)
     terms = models.TextField(blank=True)
     start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
