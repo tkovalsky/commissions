@@ -44,8 +44,6 @@ class SaleDetailView(generic.DetailView):
     model = Sale
 
 class SaleCreateView(CreateView):
-    #can use fields or form_class
-    #form_class = AddSaleForm
     model = Sale
     fields = '__all__'
 

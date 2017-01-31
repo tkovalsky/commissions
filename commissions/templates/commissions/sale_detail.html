@@ -6,9 +6,11 @@
 
    <p><strong>Seller:</strong>{{ sale.seller_name }} </p>
    <p><strong>Asking price:</strong> {{ sale.asking_price }} </p>
-   {% if lease.term_set %}
+
+
+   {% if sale.term_set %}
    <div class="hr-divider mt-5 mb-4">
-     <h3 class="hr-divider-content hr-divider-heading">Lease Terms</h3>
+     <h3 class="hr-divider-content hr-divider-heading">Terms of Sale</h3>
    </div>
 
 
@@ -18,10 +20,8 @@
        <table class="table" data-sort="table">
          <thead>
            <tr>
-             <!--<th><input type="checkbox" class="select-all" id="selectAll"></th>-->
              <th>Id</th>
-             <th>Start Date</th>
-             <th>End Date</th>
+             <th>Closing Date</th>
              <th>Commission (%)</th>
              <th>Term Commission</th>
            </tr>
@@ -33,7 +33,6 @@
            <tr>
              <!--<<td><input type="checkbox" class="select-row"></td>-->
              <td><a href="#">{{ term.id }}</a></td>
-             <td>{{ term.start_date }}</td>
              <td>{{ term.end_date }}</td>
              <td>{{ term.commission_rate }}</td>
              <td>{{ term.get_term_commission }}</td>
@@ -45,7 +44,7 @@
      </div>
    {% else %}
    <div class="hr-divider mt-5 mb-4">
-     <h3 class="hr-divider-content hr-divider-heading">No Lease Terms</h3>
+     <h3 class="hr-divider-content hr-divider-heading">No Sale Terms</h3>
    </div>
 
 

@@ -51,7 +51,8 @@
   <li><strong>notes:</strong> {{ lease.notes }}</li>
   <li><strong>added_by:</strong> {{ lease.added_by }}</li>
 
-
+  <li><strong>contingency_period_in_days </strong> {{ lease.contingency_period_in_days }}</li>
+  <li><strong>Contingency end date: </strong> {{ lease.contingency_end_date }}</li>
 
 
 
@@ -68,7 +69,7 @@
     <li><strong>lease_execution_date:</strong> {{ lease.lease_execution_date }}</li>
     <li><strong>lease_expiration_date:</strong> {{ lease.lease_expiration_date }}</li>
     <li><strong>contingency_start_date:</strong> {{ lease.contingency_start_date }}</li>
-    <li><strong>contingency_end_date:</strong> {{ lease.contingency_end_date }}</li>
+
     <li><strong>rent_commencement_date:</strong> {{ lease.rent_commencement_date }}</li>
     <li><strong>occupancy_date:</strong> {{ lease.occupancy_date }}</li>
     <br/>
@@ -79,7 +80,7 @@
     <li><strong>tenant_broker:</strong> {{ lease.tenant_broker }}</li>
     <li><strong>house_broker:</strong> {{ lease.house_broker }}</li>
     <li><strong>contingency_start_date:</strong> {{ lease.contingency_start_date }}</li>
-    <li><strong>contingency_end_date:</strong> {{ lease.contingency_end_date }}</li>
+
     <li><strong>rent_commencement_date:</strong> {{ lease.rent_commencement_date }}</li>
 
 
@@ -91,7 +92,7 @@
     <li><strong>tenant_broker:</strong> {{ lease.tenant_broker }}</li>
     <li><strong>house_broker:</strong> {{ lease.house_broker }}</li>
     <li><strong>contingency_start_date:</strong> {{ lease.contingency_start_date }}</li>
-    <li><strong>contingency_end_date:</strong> {{ lease.contingency_end_date }}</li>
+
     <li><strong>rent_commencement_date:</strong> {{ lease.rent_commencement_date }}</li>
     <br/>
     <hr>
@@ -149,7 +150,7 @@
             <td>{{ term.start_date }}</td>
             <td>{{ term.end_date }}</td>
             <td>{{ term.commission_rate }}</td>
-            <td>{{ term.get_term_commission }}</td>
+            <td>{{ term.get_lease_term_commission }}</td>
           </tr>
           {% endfor %}
 
